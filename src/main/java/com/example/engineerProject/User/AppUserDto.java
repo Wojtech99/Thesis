@@ -6,7 +6,7 @@ import com.example.engineerProject.Article.Article;
 import java.util.Objects;
 import java.util.Set;
 
-class UserDto {
+class AppUserDto {
     private Long id;
     private String firstName;
     private String lastName;
@@ -17,8 +17,8 @@ class UserDto {
     private Set<Article> articles;
     private Role role;
 
-    public UserDto(Long id, String firstName, String lastName, Integer phoneNumber,
-                   String email, String password, Set<Announcement> announcements, Set<Article> articles, Role role) {
+    public AppUserDto(Long id, String firstName, String lastName, Integer phoneNumber,
+                      String email, String password, Set<Announcement> announcements, Set<Article> articles, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -106,14 +106,14 @@ class UserDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserDto userDto = (UserDto) o;
-        return Objects.equals(id, userDto.id) && Objects.equals(firstName, userDto.firstName) &&
-                Objects.equals(lastName, userDto.lastName) &&
-                Objects.equals(phoneNumber, userDto.phoneNumber) &&
-                Objects.equals(email, userDto.email) &&
-                Objects.equals(password, userDto.password) &&
-                Objects.equals(announcements, userDto.announcements) &&
-                Objects.equals(articles, userDto.articles) && role == userDto.role;
+        AppUserDto appUserDto = (AppUserDto) o;
+        return Objects.equals(id, appUserDto.id) && Objects.equals(firstName, appUserDto.firstName) &&
+                Objects.equals(lastName, appUserDto.lastName) &&
+                Objects.equals(phoneNumber, appUserDto.phoneNumber) &&
+                Objects.equals(email, appUserDto.email) &&
+                Objects.equals(password, appUserDto.password) &&
+                Objects.equals(announcements, appUserDto.announcements) &&
+                Objects.equals(articles, appUserDto.articles) && role == appUserDto.role;
     }
 
     @Override

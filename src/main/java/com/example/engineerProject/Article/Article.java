@@ -9,15 +9,15 @@ import java.sql.Date;
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
+    private String title;
+    private String picture;
+    private String description;
+    private Date date;
+    private Boolean ApprovedByManager;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    AppUser user;
-    String title;
-    String picture;
-    String description;
-    Date date;
-    Boolean isApprovedByManager;
+    private AppUser user;
 
     public Article(){}
 
@@ -27,7 +27,7 @@ public class Article {
         this.picture = picture;
         this.description = description;
         this.date = date;
-        this.isApprovedByManager = false;
+        this.ApprovedByManager = false;
     }
 
     public Long getId() {
@@ -79,10 +79,10 @@ public class Article {
     }
 
     public Boolean getApprovedByManager() {
-        return isApprovedByManager;
+        return ApprovedByManager;
     }
 
     public void setApprovedByManager(Boolean approvedByManager) {
-        isApprovedByManager = approvedByManager;
+        ApprovedByManager = approvedByManager;
     }
 }

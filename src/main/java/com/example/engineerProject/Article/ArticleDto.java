@@ -6,22 +6,22 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class ArticleDto {
-    Long id;
-    String title;
-    String picture;
-    String description;
-    Date date;
-    Boolean isApprovedByManager;
-    AppUser user;
+    private Long id;
+    private String title;
+    private String picture;
+    private String description;
+    private Date date;
+    private Boolean ApprovedByManager;
+    private AppUser user;
 
     public ArticleDto(Long id, String title, String picture, String description,
-                      Date date, Boolean isApprovedByManager, AppUser user) {
+                      Date date, Boolean ApprovedByManager, AppUser user) {
         this.id = id;
         this.title = title;
         this.picture = picture;
         this.description = description;
         this.date = date;
-        this.isApprovedByManager = isApprovedByManager;
+        this.ApprovedByManager = ApprovedByManager;
         this.user = user;
     }
 
@@ -66,11 +66,11 @@ public class ArticleDto {
     }
 
     public Boolean getApprovedByManager() {
-        return isApprovedByManager;
+        return ApprovedByManager;
     }
 
     public void setApprovedByManager(Boolean approvedByManager) {
-        isApprovedByManager = approvedByManager;
+        ApprovedByManager = approvedByManager;
     }
 
     public AppUser getUser() {
@@ -89,12 +89,12 @@ public class ArticleDto {
         return Objects.equals(id, that.id) && Objects.equals(title, that.title) &&
                 Objects.equals(picture, that.picture) &&
                 Objects.equals(description, that.description) && Objects.equals(date, that.date) &&
-                Objects.equals(isApprovedByManager, that.isApprovedByManager) &&
+                Objects.equals(ApprovedByManager, that.ApprovedByManager) &&
                 Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, picture, description, date, isApprovedByManager, user);
+        return Objects.hash(id, title, picture, description, date, ApprovedByManager, user);
     }
 }
