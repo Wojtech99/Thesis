@@ -1,0 +1,9 @@
+server:
+  port: 9092
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+
