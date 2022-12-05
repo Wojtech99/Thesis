@@ -1,0 +1,89 @@
+package com.example.engineerProject.Article;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Service
+public class ArticleService {
+
+    private final ArticleRepository articleRepository;
+
+    public ArticleService(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
+    }
+
+    @Transactional
+    public ArticleDto saveArticle(ArticleDto articleDto) {
+        Article articleToSave = ArticleMapper.map(articleDto);
+        Article savedArticle = articleRepository.save(articleToSave);
+
+        return ArticleMapper.map(savedArticle);
+    }
+
+    @Transactional
+    public void deleteArticle(Long articleId) {
+        articleRepository.deleteById(articleId);
+    }
+
+    @Transactional
+    public Optional<ArticleDto> updateApproveStatus(Long articleId){
+        if (articleRepository.findById(articleId).isEmpty()) {
+            return Optional.empty();
+        }
+
+
+        Article articleToSave = articleRepository.findById(articleId).get();
+
+        articleToSave.setApprovedByManager(!articleToSave.getApprovedByManager());
+
+        Article savedArticle = articleRepository.save(articleToSave);
+
+
+        return Optional.of(ArticleMapper.map(savedArticle));
+    }
+
+    @Transactional
+    public Optional<ArticleDto> updateArticle(ArticleDto articleDto) {
+        if(articleRepository.findById(articleDto.getId()).isEmpty()) {
+            return Optional.empty();
+        }
+
+        Article article = articleRepository.findById(articleDto.getId()).get();
+        Article articleToUpdate = setEntityFields(article, articleDto);
+        Article savedArticle = articleRepository.save(articleToUpdate);
+
+        return Optional.of(ArticleMapper.map(savedArticle));
+    }
+
+    private Article setEntityFields(Article article, ArticleDto articleDto){
+        if (!articleDto.getTitle().isEmpty()){
+            article.setTitle(articleDto.getTitle());
+        }
+
+        if (!articleDto.getPicture().isEmpty()) {
+            article.setPicture(articleDto.getPicture());
+        }
+
+        if (!articleDto.getDescription().isEmpty()) {
+            article.setDescription(articleDto.getDescription());
+        }
+
+        return article;
+    }
+
+    public Optional<Set<ArticleDto>> articlesByStatus(boolean status){
+        return Optional.of(articleRepository.findAllByApprovedByManager(status).stream()
+                .map(ArticleMapper::map)
+                .collect(Collectors.toSet()));
+    }
+
+    public Optional<Set<ArticleDto>> articlesByUser(Long appUserId){
+        return Optional.of(articleRepository.findAllByUser_Id(appUserId).stream()
+                .map(ArticleMapper::map)
+                .collect(Collectors.toSet()));
+    }
+}
