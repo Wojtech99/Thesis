@@ -14,7 +14,7 @@ public class Article {
     private String picture;
     private String description;
     private Date date;
-    private Boolean ApprovedByManager;
+    private Boolean approvedByManager;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser user;
@@ -27,7 +27,7 @@ public class Article {
         this.picture = picture;
         this.description = description;
         this.date = date;
-        this.ApprovedByManager = false;
+        this.approvedByManager = false;
     }
 
     public Long getId() {
@@ -79,10 +79,10 @@ public class Article {
     }
 
     public Boolean getApprovedByManager() {
-        return ApprovedByManager;
+        return approvedByManager;
     }
 
     public void setApprovedByManager(Boolean approvedByManager) {
-        ApprovedByManager = approvedByManager;
+        this.approvedByManager = approvedByManager;
     }
 }
