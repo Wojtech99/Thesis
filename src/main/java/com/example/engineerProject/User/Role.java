@@ -1,8 +1,8 @@
 package com.example.engineerProject.User;
 
 public enum Role {
-    MANAGER("Manager"),
-    AGENT("Agent");
+    MANAGER("MANAGER"),
+    AGENT("AGENT");
 
     private String description;
 

@@ -1,5 +1,7 @@
 package com.example.engineerProject.User;
 
+import com.example.engineerProject.User.Dto.AppUserDto;
+
 public class AppUserMapper {
     static AppUserDto map(AppUser appUser) {
         return new AppUserDto(

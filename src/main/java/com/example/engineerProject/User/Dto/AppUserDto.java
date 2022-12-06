@@ -1,12 +1,13 @@
-package com.example.engineerProject.User;
+package com.example.engineerProject.User.Dto;
 
 import com.example.engineerProject.Announcement.Announcement;
 import com.example.engineerProject.Article.Article;
+import com.example.engineerProject.User.Role;
 
 import java.util.Objects;
 import java.util.Set;
 
-class AppUserDto {
+public class AppUserDto {
     private Long id;
     private String firstName;
     private String lastName;
