@@ -1,5 +1,6 @@
 package com.example.engineerProject.Article;
 
+import com.example.engineerProject.User.Dto.AppUserDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,5 +84,14 @@ public class ArticleService {
         return Optional.of(articleRepository.findAllByUser_Id(appUserId).stream()
                 .map(ArticleMapper::map)
                 .collect(Collectors.toSet()));
+    }
+
+    Optional<ArticleDto> takeArticleById(Long id) {
+        if (articleRepository.findById(id).isEmpty()) {
+            return Optional.empty();
+        }
+        Article article = articleRepository.findById(id).get();
+
+        return Optional.of(ArticleMapper.map(article));
     }
 }

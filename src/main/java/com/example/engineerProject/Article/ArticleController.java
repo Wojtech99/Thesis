@@ -36,8 +36,14 @@ public class ArticleController {
         return "redirect:/new-form";
     }
 
-    @GetMapping("/edit-form")
-    String editArticle(@ModelAttribute ArticleDto articleDto, Model model) {
+
+    @GetMapping("/edit-form/{id}")
+    String editArticle(@PathVariable("id") Long articleId, Model model) {
+        if (articleService.takeArticleById(articleId).isEmpty()) {
+            return "redirect:/all-user-articles";
+        }
+
+        ArticleDto articleDto = articleService.takeArticleById(articleId).get();
         model.addAttribute("article", articleDto);
 
         return "article-form";
@@ -53,6 +59,7 @@ public class ArticleController {
         return "redirect:/all-user-articles";
     }
 
+
     @PostMapping("/save-or-update")
     String saveOrUpdate(@Valid @ModelAttribute("article") ArticleDto articleDto, Model model, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
@@ -66,6 +73,7 @@ public class ArticleController {
 
         return "redirect:/edit-form/update";
     }
+
 
     @RequestMapping(
             value = "/all-user-articles/delete/{id}",
@@ -87,7 +95,7 @@ public class ArticleController {
 
         model.addAttribute("articles", articleDtoSet);
 
-        return "agent-articles";
+        return "agent-articles-list";
     }
 
     @GetMapping("/all-unapproved-articles")
@@ -97,7 +105,7 @@ public class ArticleController {
 
         model.addAttribute("articles", articles);
 
-        return "unapproved-articles";
+        return "unapproved-articles-list";
     }
 
     @RequestMapping(
