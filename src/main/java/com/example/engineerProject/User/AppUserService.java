@@ -89,4 +89,20 @@ public class AppUserService {
 
         return user;
     }
+
+    @Transactional
+    public Optional<AppUserDto> changePassword(String newPassword) {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        if (appUserRepository.findAppUserByEmail(currentUserEmail).isEmpty()){
+            return Optional.empty();
+        }
+
+        AppUser user = appUserRepository.findAppUserByEmail(currentUserEmail).get();
+        String passwordHash = passwordEncoder.encode(newPassword);
+
+        user.setPassword(passwordHash);
+
+        return Optional.of(AppUserMapper.map(user));
+    }
 }
