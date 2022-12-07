@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,14 +33,22 @@ public class AppUserService {
     }
 
     @Transactional
-    void deleteUserByEmail(String email) {
+    void deleteAgentByEmail(String email) {
         if (isCurrentUserManager()) {
             appUserRepository.deleteAppUserByEmail(email);
         }
     }
 
+    private boolean isCurrentUserManager() {
+        return SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getAuthorities()
+                .stream()
+                .anyMatch(authority -> authority.getAuthority().equals(Role.MANAGER.getDescription()));
+    }
+
     @Transactional
-    AppUserDto registerNewUser(AppUserDto appUserDto) {
+    AppUserDto registerNewAgent(AppUserDto appUserDto) {
         AppUser userToSave = new AppUser();
 
         userToSave.setFirstName(appUserDto.getFirstName());
@@ -54,14 +61,6 @@ public class AppUserService {
 
         AppUser savedUser = appUserRepository.save(userToSave);
         return AppUserMapper.map(savedUser);
-    }
-
-    private boolean isCurrentUserManager() {
-        return SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getAuthorities()
-                .stream()
-                .anyMatch(authority -> authority.getAuthority().equals(Role.MANAGER.getDescription()));
     }
 
     @Transactional
@@ -92,7 +91,7 @@ public class AppUserService {
     }
 
     @Transactional
-    Optional<AppUserDto> changePassword(String newPassword) {
+    public Optional<AppUserDto> changePassword(String newPassword) {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 
         if (appUserRepository.findAppUserByEmail(currentUserEmail).isEmpty()){
@@ -107,8 +106,12 @@ public class AppUserService {
         return Optional.of(AppUserMapper.map(user));
     }
 
+    AppUserDto getUserByEmail(String email) {
+        return AppUserMapper.map(appUserRepository.getAppUserByEmail(email));
+    }
+
     public Long getUserIdByEmail(String email) {
-        AppUser user = appUserRepository.getAppUsersByEmail(email);
+        AppUser user = appUserRepository.getAppUserByEmail(email);
         return user.getId();
     }
 }

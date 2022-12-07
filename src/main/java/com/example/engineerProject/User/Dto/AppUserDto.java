@@ -18,6 +18,8 @@ public class AppUserDto {
     private Set<Article> articles;
     private Role role;
 
+    public AppUserDto(){}
+
     public AppUserDto(Long id, String firstName, String lastName, Integer phoneNumber,
                       String email, String password, Set<Announcement> announcements, Set<Article> articles, Role role) {
         this.id = id;
