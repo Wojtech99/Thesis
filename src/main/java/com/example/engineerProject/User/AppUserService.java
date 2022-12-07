@@ -26,15 +26,15 @@ public class AppUserService {
                 .map(AppUserCredentialsMapper::map);
     }
 
-    public Set<AppUserDto> getAllUsers() {
-        return appUserRepository.getAll().stream()
+    public Set<AppUserDto> getAllAgents() {
+        return appUserRepository.getAppUsersByRole(Role.AGENT).stream()
                 .map(AppUserMapper::map)
                 .collect(Collectors.toSet());
     }
 
     @Transactional
     public void deleteUserByEmail(String email) {
-        if (isCurrentUserAdmin()) {
+        if (isCurrentUserManager()) {
             appUserRepository.deleteAppUserByEmail(email);
         }
     }
@@ -55,11 +55,38 @@ public class AppUserService {
         return AppUserMapper.map(savedUser);
     }
 
-    private boolean isCurrentUserAdmin() {
+    private boolean isCurrentUserManager() {
         return SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getAuthorities()
                 .stream()
                 .anyMatch(authority -> authority.getAuthority().equals(Role.MANAGER.getDescription()));
+    }
+
+    @Transactional
+    public Optional<AppUserDto> updateUserInformation(AppUserDto appUserDto) {
+        if (appUserRepository.findById(appUserDto.getId()).isEmpty()){
+            return Optional.empty();
+        }
+
+        AppUser currentAppUser = appUserRepository.findById(appUserDto.getId()).get();
+        AppUser userToSave = setEntityFields(currentAppUser, appUserDto);
+        AppUser savedUser = appUserRepository.save(userToSave);
+
+        return Optional.of(AppUserMapper.map(savedUser));
+    }
+
+    private AppUser setEntityFields(AppUser user, AppUserDto userDto) {
+        if (!userDto.getFirstName().isEmpty()) {
+            user.setFirstName(userDto.getFirstName());
+        }
+        if (!userDto.getLastName().isEmpty()) {
+            user.setLastName(userDto.getLastName());
+        }
+        if (userDto.getPhoneNumber() != null) {
+            user.setPhoneNumber(user.getPhoneNumber());
+        }
+
+        return user;
     }
 }
