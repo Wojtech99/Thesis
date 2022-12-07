@@ -30,14 +30,41 @@ public class ArticleController {
     }
 
     @PostMapping("/new-form/save")
-    String saveForm(@Valid @ModelAttribute("article") ArticleDto articleDto, BindingResult bindingResult) {
+    String saveForm(@ModelAttribute("article") ArticleDto articleDto) {
+        articleService.saveArticle(articleDto);
+
+        return "redirect:/new-form";
+    }
+
+    @GetMapping("/edit-form")
+    String editArticle(@ModelAttribute ArticleDto articleDto, Model model) {
+        model.addAttribute("article", articleDto);
+
+        return "article-form";
+    }
+
+    @RequestMapping(
+            value = "/edit-form/update",
+            method = {RequestMethod.PATCH, RequestMethod.GET}
+    )
+    String updateArticle(@ModelAttribute("article") ArticleDto articleDto) {
+        articleService.updateArticle(articleDto);
+
+        return "redirect:/all-user-articles";
+    }
+
+    @PostMapping("/save-or-update")
+    String saveOrUpdate(@Valid @ModelAttribute("article") ArticleDto articleDto, Model model, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             return "article-form";
         }
 
-        articleService.saveArticle(articleDto);
+        model.addAttribute("article", articleDto);
+        if (articleDto.getId() == null) {
+            return "redirect:/new-form/save";
+        }
 
-        return "redirect:/new-form";
+        return "redirect:/edit-form/update";
     }
 
     @RequestMapping(
@@ -77,7 +104,7 @@ public class ArticleController {
             value = "/all-unapproved-articles/approve",
             method = {RequestMethod.PATCH, RequestMethod.GET}
     )
-    String approveArticle(@RequestParam("ArticleId") Long articleId){
+    String approveArticle(@ModelAttribute("ArticleId") Long articleId){
         articleService.updateApproveStatus(articleId);
 
         return "redirect:/all-unapproved-articles";
