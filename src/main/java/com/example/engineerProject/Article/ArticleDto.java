@@ -14,6 +14,8 @@ public class ArticleDto {
     private Boolean approvedByManager;
     private AppUser user;
 
+    public ArticleDto(){}
+
     public ArticleDto(Long id, String title, String picture, String description,
                       Date date, Boolean approvedByManager, AppUser user) {
         this.id = id;

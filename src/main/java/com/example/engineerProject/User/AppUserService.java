@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,26 +22,26 @@ public class AppUserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Optional<AppUserCredentialsDto> findCredentialsByEmail(String email) {
+    Optional<AppUserCredentialsDto> findCredentialsByEmail(String email) {
         return appUserRepository.findAppUserByEmail(email)
                 .map(AppUserCredentialsMapper::map);
     }
 
-    public Set<AppUserDto> getAllAgents() {
+    Set<AppUserDto> getAllAgents() {
         return appUserRepository.getAppUsersByRole(Role.AGENT).stream()
                 .map(AppUserMapper::map)
                 .collect(Collectors.toSet());
     }
 
     @Transactional
-    public void deleteUserByEmail(String email) {
+    void deleteUserByEmail(String email) {
         if (isCurrentUserManager()) {
             appUserRepository.deleteAppUserByEmail(email);
         }
     }
 
     @Transactional
-    public AppUserDto registerNewUser(AppUserDto appUserDto) {
+    AppUserDto registerNewUser(AppUserDto appUserDto) {
         AppUser userToSave = new AppUser();
 
         userToSave.setFirstName(appUserDto.getFirstName());
@@ -64,7 +65,7 @@ public class AppUserService {
     }
 
     @Transactional
-    public Optional<AppUserDto> updateUserInformation(AppUserDto appUserDto) {
+    Optional<AppUserDto> updateUserInformation(AppUserDto appUserDto) {
         if (appUserRepository.findById(appUserDto.getId()).isEmpty()){
             return Optional.empty();
         }
@@ -91,7 +92,7 @@ public class AppUserService {
     }
 
     @Transactional
-    public Optional<AppUserDto> changePassword(String newPassword) {
+    Optional<AppUserDto> changePassword(String newPassword) {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 
         if (appUserRepository.findAppUserByEmail(currentUserEmail).isEmpty()){
@@ -104,5 +105,10 @@ public class AppUserService {
         user.setPassword(passwordHash);
 
         return Optional.of(AppUserMapper.map(user));
+    }
+
+    public Long getUserIdByEmail(String email) {
+        AppUser user = appUserRepository.getAppUsersByEmail(email);
+        return user.getId();
     }
 }
