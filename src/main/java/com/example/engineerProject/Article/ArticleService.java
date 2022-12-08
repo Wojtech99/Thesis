@@ -1,9 +1,14 @@
 package com.example.engineerProject.Article;
 
+import com.example.engineerProject.User.AppUser;
+import com.example.engineerProject.User.AppUserMapper;
+import com.example.engineerProject.User.AppUserService;
 import com.example.engineerProject.User.Dto.AppUserDto;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,13 +17,21 @@ import java.util.stream.Collectors;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final AppUserService userService;
 
-    public ArticleService(ArticleRepository articleRepository) {
+    public ArticleService(ArticleRepository articleRepository, AppUserService userService) {
         this.articleRepository = articleRepository;
+        this.userService = userService;
     }
 
     @Transactional
     ArticleDto saveArticle(ArticleDto articleDto) {
+        Date date = new Date(System.currentTimeMillis());
+        AppUser appUserDto = userService.getCurrentUserToSave();
+
+        articleDto.setDate(date);
+        articleDto.setUser(appUserDto);
+
         Article articleToSave = ArticleMapper.map(articleDto);
         Article savedArticle = articleRepository.save(articleToSave);
 
@@ -80,8 +93,12 @@ public class ArticleService {
                 .collect(Collectors.toSet()));
     }
 
-    Optional<Set<ArticleDto>> articlesByUser(Long appUserId){
-        return Optional.of(articleRepository.findAllByUser_Id(appUserId).stream()
+    Optional<Set<ArticleDto>> articlesByUser(){
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        Long currentUserId = userService.getUserIdByEmail(currentUserEmail);
+
+
+        return Optional.of(articleRepository.findAllByUser_Id(currentUserId).stream()
                 .map(ArticleMapper::map)
                 .collect(Collectors.toSet()));
     }

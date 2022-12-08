@@ -1,8 +1,6 @@
 package com.example.engineerProject.Article;
 
-import com.example.engineerProject.User.AppUserService;
 import jakarta.validation.Valid;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,11 +13,9 @@ import java.util.Set;
 public class ArticleController {
 
     private final ArticleService articleService;
-    private final AppUserService userService;
 
-    public ArticleController(ArticleService articleService, AppUserService userService) {
+    public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
-        this.userService = userService;
     }
 
     @GetMapping("/new-form")
@@ -88,10 +84,7 @@ public class ArticleController {
     @GetMapping("/all-user-articles")
     String allUserArticles(Model model) {
         Set<ArticleDto> articleDtoSet = new HashSet<>();
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        Long currentUserId = userService.getUserIdByEmail(currentUserEmail);
-
-        articleService.articlesByUser(currentUserId).ifPresent(articleDtoSet::addAll);
+        articleService.articlesByUser().ifPresent(articleDtoSet::addAll);
 
         model.addAttribute("articles", articleDtoSet);
 

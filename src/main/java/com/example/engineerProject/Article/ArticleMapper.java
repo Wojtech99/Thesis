@@ -1,16 +1,22 @@
 package com.example.engineerProject.Article;
 
+import com.example.engineerProject.User.AppUserMapper;
+
 public class ArticleMapper {
+
     static ArticleDto map(Article article) {
-        return new ArticleDto(
+        ArticleDto articleDto = new ArticleDto(
                 article.getId(),
                 article.getTitle(),
                 article.getPicture(),
                 article.getDescription(),
                 article.getDate(),
-                article.getApprovedByManager(),
                 article.getUser()
         );
+
+        articleDto.setApprovedByManager(article.getApprovedByManager());
+
+        return articleDto;
     }
 
     static Article map(ArticleDto articleDto) {

@@ -17,13 +17,13 @@ public class ArticleDto {
     public ArticleDto(){}
 
     public ArticleDto(Long id, String title, String picture, String description,
-                      Date date, Boolean approvedByManager, AppUser user) {
+                      Date date, AppUser user) {
         this.id = id;
         this.title = title;
         this.picture = picture;
         this.description = description;
         this.date = date;
-        this.approvedByManager = approvedByManager;
+        this.approvedByManager = false;
         this.user = user;
     }
 

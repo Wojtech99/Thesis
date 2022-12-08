@@ -110,6 +110,11 @@ public class AppUserService {
         return AppUserMapper.map(appUserRepository.getAppUserByEmail(email));
     }
 
+    public AppUser getCurrentUserToSave() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        return appUserRepository.getAppUserByEmail(currentUserEmail);
+    }
+
     public Long getUserIdByEmail(String email) {
         AppUser user = appUserRepository.getAppUserByEmail(email);
         return user.getId();
