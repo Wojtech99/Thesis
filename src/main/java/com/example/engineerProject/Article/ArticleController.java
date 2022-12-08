@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Controller("/article")
+@Controller
 public class ArticleController {
 
     private final ArticleService articleService;
@@ -91,7 +91,7 @@ public class ArticleController {
         return "agent-articles-list";
     }
 
-    @GetMapping("/all-approved-articles")
+    @GetMapping("/all-approved")
     String allApprovedArticles(Model model) {
         Set<ArticleDto> articles = new HashSet<>();
         articleService.articlesByStatus(true).ifPresent(articles::addAll);
@@ -101,7 +101,7 @@ public class ArticleController {
         return "approved-articles-list";
     }
 
-    @GetMapping("/all-unapproved-articles")
+    @GetMapping("/all-unapproved")
     String allUnapprovedArticles(Model model) {
         Set<ArticleDto> articles = new HashSet<>();
         articleService.articlesByStatus(false).ifPresent(articles::addAll);

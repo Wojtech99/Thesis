@@ -39,7 +39,7 @@ public class ArticleResource {
         return ResponseEntity.created(savedArticleUri).body(savedArticle);
     }
 
-    @PatchMapping("/update")
+    @PatchMapping("/update-article")
     ResponseEntity<?> updateArticle(@Valid @RequestBody ArticleDto articleDto) {
         return articleService.updateArticle(articleDto)
                 .map(article -> ResponseEntity.noContent().build())
@@ -54,7 +54,7 @@ public class ArticleResource {
 
     @GetMapping("/all-user-articles/{id}")
     ResponseEntity<Set<ArticleDto>> allUserArticles(@PathVariable("id") Long userId){
-        return articleService.articlesByUser(userId)
+        return articleService.articlesByUser()
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
