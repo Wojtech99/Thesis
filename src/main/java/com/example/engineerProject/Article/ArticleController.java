@@ -86,7 +86,7 @@ public class ArticleController {
     }
 
     @GetMapping("/all-user-articles")
-    String allUsersArticles(Model model) {
+    String allUserArticles(Model model) {
         Set<ArticleDto> articleDtoSet = new HashSet<>();
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         Long currentUserId = userService.getUserIdByEmail(currentUserEmail);
@@ -96,6 +96,16 @@ public class ArticleController {
         model.addAttribute("articles", articleDtoSet);
 
         return "agent-articles-list";
+    }
+
+    @GetMapping("/all-approved-articles")
+    String allApprovedArticles(Model model) {
+        Set<ArticleDto> articles = new HashSet<>();
+        articleService.articlesByStatus(true).ifPresent(articles::addAll);
+
+        model.addAttribute("articles", articles);
+
+        return "approved-articles-list";
     }
 
     @GetMapping("/all-unapproved-articles")
@@ -109,10 +119,10 @@ public class ArticleController {
     }
 
     @RequestMapping(
-            value = "/all-unapproved-articles/approve",
+            value = "/all-unapproved-articles/approve/{id}",
             method = {RequestMethod.PATCH, RequestMethod.GET}
     )
-    String approveArticle(@ModelAttribute("ArticleId") Long articleId){
+    String approveArticle(@PathVariable("id") Long articleId){
         articleService.updateApproveStatus(articleId);
 
         return "redirect:/all-unapproved-articles";
