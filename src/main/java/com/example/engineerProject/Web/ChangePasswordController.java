@@ -1,4 +1,4 @@
-package com.example.engineerProject.web;
+package com.example.engineerProject.Web;
 
 import com.example.engineerProject.User.AppUserService;
 import org.springframework.stereotype.Controller;
