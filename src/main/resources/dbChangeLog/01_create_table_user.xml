@@ -13,7 +13,7 @@
             <column name="last_name" type="VARCHAR(35)"/>
             <column name="phone_name" type="INTEGER"/>
             <column name="email" type="VARCHAR(64)"/>
-            <column name="password" type="VARCHAR(16)"/>
+            <column name="password" type="VARCHAR(200)"/>
             <column name="role" type="SMALLINT"/>
         </createTable>
     </changeSet>
