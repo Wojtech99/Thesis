@@ -17,17 +17,15 @@
 		<java.version>19</java.version>
 	</properties>
 	<dependencies>
-		<!-- Niektóre klasy, np. Argon2PasswordEncoder wymagają do poprawnego działania dodatkowej biblioteki BouncyCastle -->
+		<!-- A Argon2PasswordEncoder wymaga do poprawnego działania dodatkowej biblioteki BouncyCastle -->
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15on</artifactId>
 			<version>1.70</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>3.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -73,7 +71,11 @@
 			<scope>test</scope>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>4.8.0</version>
+		</dependency>
 
 
 	</dependencies>
