@@ -9,12 +9,12 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="firstName" type="VARCHAR(30)"/>
-            <column name="lastName" type="VARCHAR(35)"/>
-            <column name="phoneNumber" type="INTEGER"/>
+            <column name="first_name" type="VARCHAR(30)"/>
+            <column name="last_name" type="VARCHAR(35)"/>
+            <column name="phone_name" type="INTEGER"/>
             <column name="email" type="VARCHAR(64)"/>
             <column name="password" type="VARCHAR(16)"/>
-            <column name="role" type="VARCHAR(16)"/>
+            <column name="role" type="SMALLINT"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

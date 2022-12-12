@@ -16,6 +16,7 @@ public class Article {
     private String picture;
     private String description;
     private Date date;
+    @Column(name = "approved_by_manager")
     private Boolean approvedByManager;
     @ManyToOne
     @JoinColumn(name = "user_id")

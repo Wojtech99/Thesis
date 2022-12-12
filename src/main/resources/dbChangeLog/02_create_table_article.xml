@@ -13,7 +13,7 @@
             <column name="picture" type="VARCHAR(1000)"/>
             <column name="description" type="VARCHAR(1500)"/>
             <column name="date" type="DATE"/>
-            <column name="approvedByManager" type="BOOL"/>
+            <column name="approved_by_manager" type="BOOL"/>
             <column name="user_id" type="BIGINT"/>
         </createTable>
     </changeSet>

@@ -7,4 +7,5 @@
     <include file="01_create_table_user.xml" relativeToChangelogFile="true" />
     <include file="02_create_table_article.xml" relativeToChangelogFile="true" />
     <include file="03_create_table_announcement.xml" relativeToChangelogFile="true" />
+    <include file="testdata/testdata_01_add_user.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>
