@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="01" author="Wojciech">
+        <createTable tableName="app_user">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="firstName" type="VARCHAR(30)"/>
+            <column name="lastName" type="VARCHAR(35)"/>
+            <column name="phoneNumber" type="INTEGER"/>
+            <column name="email" type="VARCHAR(64)"/>
+            <column name="password" type="VARCHAR(16)"/>
+            <column name="role" type="VARCHAR(16)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

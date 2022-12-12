@@ -2,10 +2,12 @@ package com.example.engineerProject.Article;
 
 import com.example.engineerProject.User.AppUser;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
 
-@Entity
+@Entity(name = "article")
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

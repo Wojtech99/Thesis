@@ -3,7 +3,7 @@ package com.example.engineerProject.Announcement;
 import com.example.engineerProject.User.AppUser;
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "announcement")
 public class Announcement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
