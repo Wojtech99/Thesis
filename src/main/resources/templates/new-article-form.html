@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Article form</title>
+</head>
+<body>
+<h2>Dodaj nowy artykuł</h2>
+<form method="post" action="/new-form/save" th:object="${articleToSave}">
+    <table>
+        <tr>
+            <td>tytuł:</td>
+            <td><input th:field="*{title}" type="text"></td>
+            <td><p th:errors="*{title}" class="error">Tutaj jest Błąd 1</p><td>
+        </tr>
+        <tr>
+            <td>obraz: </td>
+            <td><input th:field="*{picture}" type="text"></td>
+            <td><p th:errors="*{picture}" class="error">Tutaj jest Błąd 2</p><td>
+        </tr>
+        <tr>
+            <td>opis nieruchomości</td>
+            <td><input th:field="*{description}" type="text"></td>
+            <td><p th:errors="*{description}" class="error">Tutaj jest Błąd 3</p><td>
+        </tr>
+    </table>
+    <button type="submit">Zapisz Kategorie</button>
+</form>
+</body>
+</html>

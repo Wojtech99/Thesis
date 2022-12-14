@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Edytuj artykuł</h2>
+<form method="post" action="/edit-form/update" th:object="${editArticle}">
+  <table>
+    <tr>
+      <td>Id:</td>
+      <td><input th:field="*{id}" th:text="*{id}" type="hidden"></td>
+    </tr>
+    <tr>
+      <td>Tytuł:</td>
+      <td><input th:field="*{title}" type="text"></td>
+      <td><p th:errors="*{title}" class="error">Tutaj jest Błąd 1</p><td>
+    </tr>
+    <tr>
+      <td>Obraz: </td>
+      <td><input th:field="*{picture}" type="text"></td>
+      <td><p th:errors="*{picture}" class="error">Tutaj jest Błąd 2</p><td>
+    </tr>
+    <tr>
+      <td>Opis nieruchomości</td>
+      <td><input th:field="*{description}" type="text"></td>
+      <td><p th:errors="*{description}" class="error">Tutaj jest Błąd 3</p><td>
+    </tr>
+  </table>
+  <button type="submit">Zapisz Artykuł</button>
+</form>
+</body>
+</html>

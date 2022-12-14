@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>new Agent form</title>
 </head>
 <body>
-
+<h2>Dodaj nowego agenta</h2>
+<form method="post" action="/agent/save" th:object="${agent}">
+    <table>
+        <tr>
+            <td>Imię:</td>
+            <td><input th:field="*{firstName}" type="text"></td>
+            <td><p th:errors="*{firstName}" class="error">Tutaj jest Błąd 1</p><td>
+        </tr>
+        <tr>
+            <td>Nazwisko: </td>
+            <td><input th:field="*{lastName}" type="text"></td>
+            <td><p th:errors="*{lastName}" class="error">Tutaj jest Błąd 2</p><td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input th:field="*{email}" type="text"></td>
+            <td><p th:errors="*{email}" class="error">Tutaj jest Błąd 3</p><td>
+        </tr>
+        <tr>
+            <td>Hasło:</td>
+            <td><input th:field="*{password}" type="text"></td>
+            <td><p th:errors="*{password}" class="error">Tutaj jest Błąd 4</p><td>
+        </tr>
+    </table>
+    <button type="submit">Stwórz Agenta</button>
+</form>
 </body>
 </html>
