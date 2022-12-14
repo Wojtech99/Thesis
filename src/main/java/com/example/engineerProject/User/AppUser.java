@@ -3,6 +3,7 @@ package com.example.engineerProject.User;
 import com.example.engineerProject.Announcement.Announcement;
 import com.example.engineerProject.Article.Article;
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class AppUser {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "phone_name")
+    @Column(name = "phone_number")
     private Integer phoneNumber;
     private String email;
     private String password;

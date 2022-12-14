@@ -8,7 +8,7 @@
         <insert tableName="app_user">
             <column name="first_name" value="wojciech"/>
             <column name="last_name" value="n-ski"/>
-            <column name="phone_name" value="123456789"/>
+            <column name="phone_number" value="123456789"/>
             <!-- email: admin@gmail.com -->
             <column name="email" value="admin@gmail.com"/>
             <!-- password: javaiscool -->
