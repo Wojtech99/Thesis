@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<table th:remove="all-but-first" th:each="article: ${articles}">
+    <tr>
+        <td><a th:text="|${article.title}|"></a></td>
+        <td><a href="#" th:href="@{|/article/${article.id}|}">Zobacz</a></td>
+    </tr>
+    <tr>
+        <td><a href="#">
+            title</a></td>
+        <td><a href="#">Zobacz</a></td>
+    </tr>
+</table>
 </body>
 </html>
