@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <table th:object="${article}">
+    <tr>
+      <td><a th:text="*{title}" type="text"></a></td>
+    </tr>
+    <tr>
+      <td><a th:date="*{date}" type="date"></a></td>
+    </tr>
+    <tr>
+      <td><a th:text="*{picture}" type="text"></a></td>
+    </tr>
+    <tr>
+      <td><a th:text="*{description}" type="text"></a></td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Dodaj nowy artykuł</h2>
-<form method="post" action="/new-form/save" th:object="${articleToSave}">
+<form method="post" th:action="@{|/new-form/save|}" th:object="${articleToSave}">
     <table>
         <tr>
             <td>tytuł:</td>

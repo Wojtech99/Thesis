@@ -7,15 +7,12 @@
 <body>
 <table th:remove="all-but-first" th:each="article: ${articles}">
     <tr>
-        <td><a href="#"
-                                th:text="|${article.title}|">
-        </a></td>
+        <td><a href="#" th:href="@{|/article/${article.id}|}" th:text="|${article.title}|"></a></td>
         <td><a href="#" th:href="@{|/edit-form/${article.id}|}">Edytuj</a></td>
         <td><a href="#" th:href="@{|/all-user-articles/delete/${article.id}|}">Usuń</a></td>
     </tr>
     <tr>
-        <td><a href="#">
-            title</a></td>
+        <td><a href="#">title</a></td>
         <td><a href="#">Usuń</a></td>
         <td><a href="#">edytuj</a></td>
 

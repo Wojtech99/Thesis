@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Edytuj artykuł</h2>
-<form method="post" action="/edit-form/update" th:object="${editArticle}">
+<form method="post" th:action="@{|/edit-form/update|}" th:object="${editArticle}">
   <table>
     <tr>
       <td>Id:</td>

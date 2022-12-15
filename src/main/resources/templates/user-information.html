@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>user info</title>
+</head>
+<body>
+<table th:object="${user}">
+  <tr>
+    <td>Imię: </td>
+    <td><a th:text="|${user.firstName}|"></a></td>
+  </tr>
+  <tr>
+    <td>Nazwisko: </td>
+    <td><a th:text="|${user.lastName}|"></a></td>
+  </tr>
+  <tr>
+    <td>Numer telefonu: </td>
+    <td><a th:text="|${user.phoneNumber}|"></a></td>
+  </tr>
+  <tr>
+    <td>email: </td>
+    <td><a th:text="|${user.email}|"></a></td>
+  </tr>
+</table>
+<p><a href="#" th:href="@{|/user/update-form|}">Edytuj informacje</a></p>
+<p><a href="#" th:href="@{|/change-password|}">Zmień Hasło</a></p>
+</body>
+</html>

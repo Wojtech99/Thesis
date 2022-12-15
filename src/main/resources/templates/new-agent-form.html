@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Dodaj nowego agenta</h2>
-<form method="post" action="/agent/save" th:object="${agent}">
+<form method="post" th:action="@{/agent/save}" th:object="${agent}">
     <table>
         <tr>
             <td>Imię:</td>

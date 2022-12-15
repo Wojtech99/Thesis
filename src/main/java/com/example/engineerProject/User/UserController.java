@@ -18,35 +18,58 @@ public class UserController {
         this.userService = userService;
     }
 
-
+    /**
+     * show all agents
+     * @param model model
+     * @return String
+     */
     @GetMapping("/agents-list")
     String allAgentsList(Model model) {
        Set<AppUserDto> userDtoSet = userService.getAllAgents();
-       model.addAttribute("userList", userDtoSet);
+       model.addAttribute("agentList", userDtoSet);
 
        return "all-agent-list";
     }
 
+    /**
+     * delete agent by email
+     * @param email String
+     * @return String
+     */
     @RequestMapping(
-            value = "/agent-List/delete",
+            value = "/agent-List/delete/{email}",
             method = {RequestMethod.DELETE, RequestMethod.GET}
     )
-    String deleteAgent(@ModelAttribute("agentEmail") String email) {
+    String deleteAgent(@PathVariable("email") String email) {
         userService.deleteAgentByEmail(email);
 
         return "redirect:/agents-list";
     }
 
 
+    /**
+     * show new agent form
+     * @param model Model
+     * @return String
+     */
     @GetMapping("/agent/register-form")
     String registerNewUser(Model model) {
-        model.addAttribute("user", new AppUserDto());
+        model.addAttribute("agent", new AppUserDto());
 
         return "new-agent-form";
     }
 
-    @PostMapping("/agent/save")
-    String saveNewAgent(@Valid @ModelAttribute("user") AppUserDto appUserDto, BindingResult bindingResult){
+    /**
+     * save new agent
+     * @param appUserDto AppUserDto
+     * @param bindingResult BindingResult
+     * @return String
+     */
+    @RequestMapping(
+            value = "/agent/save",
+            method = {RequestMethod.POST, RequestMethod.POST}
+    )
+    String saveNewAgent(@Valid @ModelAttribute("agent") AppUserDto appUserDto, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return "new-agent-form";
         }
@@ -56,27 +79,53 @@ public class UserController {
         return "redirect:/agent/register-form";
     }
 
-
+    /**
+     * show edit user information form
+     * @param model Model
+     * @return String
+     */
     @GetMapping("/user/update-form")
     String updateAgentForm(Model model) {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         AppUserDto appUserDto = userService.getUserByEmail(currentUserEmail);
 
-        model.addAttribute("user", appUserDto);
+        model.addAttribute("userToEdit", appUserDto);
 
         return "edit-user-form";
     }
 
+    /**
+     * update current user information
+     * @param userDto AppUserDto
+     * @param bindingResult BindingResult
+     * @return String
+     */
     @RequestMapping(
-            value = "/user/update-form/save",
-            method = {RequestMethod.PATCH, RequestMethod.GET}
+            value = "/user/update-form/update",
+            method = {RequestMethod.PATCH, RequestMethod.POST}
     )
-    String updateAgentInformation(@Valid @ModelAttribute("user") AppUserDto userDto, BindingResult bindingResult) {
+    String updateUserInformation(@Valid @ModelAttribute("userToEdit") AppUserDto userDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "edit-user-form";
         }
+
         userService.updateUserInformation(userDto);
 
-        return "redirect:/agents-list";
+        return "redirect:/user-information";
+    }
+
+    /**
+     * show user information
+     * @param model Model
+     * @return String
+     */
+    @GetMapping("/user-information")
+    String takeUserInformation(Model model) {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        AppUserDto userDto = userService.getUserByEmail(currentUserEmail);
+
+        model.addAttribute("user", userDto);
+
+        return "user-information";
     }
 }
