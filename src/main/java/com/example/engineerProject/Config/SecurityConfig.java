@@ -13,9 +13,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(
-                requests -> requests
-                        .anyRequest().permitAll());
+
+        http.authorizeHttpRequests(requests -> requests
+                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/new-form").authenticated()
+                .anyRequest().authenticated());
+
+        http.formLogin(login -> login.loginPage("/login")
+                .permitAll());
 
         http.logout(logout -> logout
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout/**",
@@ -26,7 +31,6 @@ public class SecurityConfig {
         //wyświetlanie błędu konsoli
         http.headers().frameOptions().disable();
 
-        http.csrf().disable();
 
         return http.build();
     }
