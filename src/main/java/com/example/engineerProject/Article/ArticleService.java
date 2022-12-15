@@ -31,6 +31,7 @@ public class ArticleService {
 
         articleDto.setDate(date);
         articleDto.setUser(appUserDto);
+        articleDto.setApprovedByManager(false);
 
         Article articleToSave = ArticleMapper.map(articleDto);
         Article savedArticle = articleRepository.save(articleToSave);

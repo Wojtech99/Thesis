@@ -1,14 +1,20 @@
 package com.example.engineerProject.Article;
 
 import com.example.engineerProject.User.AppUser;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
 import java.util.Objects;
 
 public class ArticleDto {
     private Long id;
+    @NotNull
+    @Size(min = 3, max = 50)
     private String title;
     private String picture;
+    @NotNull
+    @Size(max = 1500)
     private String description;
     private Date date;
     private Boolean approvedByManager;

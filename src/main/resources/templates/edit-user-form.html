@@ -6,8 +6,12 @@
 </head>
 <body>
 <h1>Edytuj Profil</h1>
-<form method="post" action="/user/update-form/save" th:object="${user}">
+<form method="post" th:action="@{|/user/update-form/update|}" th:object="${userToEdit}">
     <table>
+        <tr>
+            <td>email:</td>
+            <td><input th:field="*{email}" th:text="*{email}" type="hidden"></td>
+        </tr>
         <tr>
             <td>Imię:</td>
             <td><input th:field="*{firstName}" type="text"></td>
@@ -19,12 +23,12 @@
             <td><p th:errors="*{lastName}" class="error">Tutaj jest Błąd 2</p><td>
         </tr>
         <tr>
-            <td>Hasło:</td>
+            <td>Numer telefonu:</td>
             <td><input th:field="*{phoneNumber}" type="text"></td>
             <td><p th:errors="*{phoneNumber}" class="error">Tutaj jest Błąd 3</p><td>
         </tr>
     </table>
-    <button type="submit">Zapisz</button>
+    <button type="submit">Zapisz Artykuł</button>
 </form>
 </body>
 </html>

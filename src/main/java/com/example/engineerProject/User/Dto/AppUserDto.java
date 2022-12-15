@@ -3,16 +3,24 @@ package com.example.engineerProject.User.Dto;
 import com.example.engineerProject.Announcement.Announcement;
 import com.example.engineerProject.Article.Article;
 import com.example.engineerProject.User.Role;
+import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 import java.util.Set;
 
 public class AppUserDto {
     private Long id;
+    @Size(min = 2, max = 30)
     private String firstName;
+    @Size(min = 2, max = 35)
     private String lastName;
+    @Min(9)
     private Integer phoneNumber;
+    @NotNull(message = "this field can not be null")
+    @Email
     private String email;
+    @NotNull(message = "this field can not be null")
+    @Size(min = 8, max = 16)
     private String password;
     private Set<Announcement> announcements;
     private Set<Article> articles;

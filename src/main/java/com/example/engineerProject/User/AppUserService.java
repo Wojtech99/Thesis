@@ -44,7 +44,7 @@ public class AppUserService {
                 .getAuthentication()
                 .getAuthorities()
                 .stream()
-                .anyMatch(authority -> authority.getAuthority().equals(Role.MANAGER.getDescription()));
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_" + Role.MANAGER.getDescription()));
     }
 
     @Transactional
@@ -65,11 +65,12 @@ public class AppUserService {
 
     @Transactional
     Optional<AppUserDto> updateUserInformation(AppUserDto appUserDto) {
-        if (appUserRepository.findById(appUserDto.getId()).isEmpty()){
+        if (appUserRepository.findAppUserByEmail(appUserDto.getEmail()).isEmpty()){
             return Optional.empty();
         }
 
-        AppUser currentAppUser = appUserRepository.findById(appUserDto.getId()).get();
+
+        AppUser currentAppUser = appUserRepository.findAppUserByEmail(appUserDto.getEmail()).get();
         AppUser userToSave = setEntityFields(currentAppUser, appUserDto);
         AppUser savedUser = appUserRepository.save(userToSave);
 

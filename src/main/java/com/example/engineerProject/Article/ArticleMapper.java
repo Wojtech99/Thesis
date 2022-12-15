@@ -1,7 +1,5 @@
 package com.example.engineerProject.Article;
 
-import com.example.engineerProject.User.AppUserMapper;
-
 public class ArticleMapper {
 
     static ArticleDto map(Article article) {
