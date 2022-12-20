@@ -19,8 +19,7 @@ public class AppUserDto {
     @NotNull(message = "this field can not be null")
     @Email
     private String email;
-    @NotNull(message = "this field can not be null")
-    @Size(min = 8, max = 16)
+    @Size(min = 8, max = 1600)
     private String password;
     private Set<Announcement> announcements;
     private Set<Article> articles;

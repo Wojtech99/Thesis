@@ -87,6 +87,7 @@ public class UserController {
     @GetMapping("/user/update-form")
     String updateAgentForm(Model model) {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+
         AppUserDto appUserDto = userService.getUserByEmail(currentUserEmail);
 
         model.addAttribute("userToEdit", appUserDto);

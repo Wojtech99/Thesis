@@ -15,8 +15,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/new-form").authenticated()
+                .requestMatchers("/").permitAll()
                 .anyRequest().authenticated());
 
         http.formLogin(login -> login.loginPage("/login")
@@ -27,10 +26,6 @@ public class SecurityConfig {
                         HttpMethod.GET.name()))
                 .logoutSuccessUrl("/")
         );
-
-        //wyświetlanie błędu konsoli
-        http.headers().frameOptions().disable();
-
 
         return http.build();
     }

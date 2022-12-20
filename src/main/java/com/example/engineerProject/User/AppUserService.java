@@ -69,7 +69,6 @@ public class AppUserService {
             return Optional.empty();
         }
 
-
         AppUser currentAppUser = appUserRepository.findAppUserByEmail(appUserDto.getEmail()).get();
         AppUser userToSave = setEntityFields(currentAppUser, appUserDto);
         AppUser savedUser = appUserRepository.save(userToSave);
@@ -85,7 +84,7 @@ public class AppUserService {
             user.setLastName(userDto.getLastName());
         }
         if (userDto.getPhoneNumber() != null) {
-            user.setPhoneNumber(user.getPhoneNumber());
+            user.setPhoneNumber(userDto.getPhoneNumber());
         }
 
         return user;

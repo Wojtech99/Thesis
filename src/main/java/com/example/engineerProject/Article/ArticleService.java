@@ -1,9 +1,7 @@
 package com.example.engineerProject.Article;
 
 import com.example.engineerProject.User.AppUser;
-import com.example.engineerProject.User.AppUserMapper;
 import com.example.engineerProject.User.AppUserService;
-import com.example.engineerProject.User.Dto.AppUserDto;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,12 +70,12 @@ public class ArticleService {
         return Optional.of(ArticleMapper.map(savedArticle));
     }
 
-    Article setEntityFields(Article article, ArticleDto articleDto){
+    private Article setEntityFields(Article article, ArticleDto articleDto){
         if (!articleDto.getTitle().isEmpty()){
             article.setTitle(articleDto.getTitle());
         }
 
-        if (!articleDto.getPicture().isEmpty()) {
+        if (!articleDto.getPicture().isEmpty()){
             article.setPicture(articleDto.getPicture());
         }
 

@@ -1,28 +1,36 @@
 package com.example.engineerProject.Article;
 
+import com.example.engineerProject.Data.ImageService;
 import jakarta.validation.Valid;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashSet;
-import java.util.Optional;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 
 @Controller
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final ImageService imageService;
 
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(ArticleService articleService, ImageService imageService) {
         this.articleService = articleService;
+        this.imageService = imageService;
     }
 
     /**
      * show new article form
-     * @param model
-     * @return
+     * @param model Model
+     * @return String
      */
     @GetMapping("/new-form")
     String newForm(Model model) {
@@ -33,25 +41,40 @@ public class ArticleController {
 
     /**
      * save new article
-     * @param articleDto
-     * @param bindingResult
-     * @return
+     * @param articleDto ArticleDto
+     * @param bindingResult BindingResult
+     * @param imageFile MultipartFile
+     * @return String
      */
     @PostMapping("/new-form/save")
-    String saveForm(@Valid @ModelAttribute("articleToSave") ArticleDto articleDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            return "new-article-form";
-        }
-        articleService.saveArticle(articleDto);
+    String saveForm(@Valid @ModelAttribute("articleToSave") ArticleDto articleDto,
+                    BindingResult bindingResult,
+                    @RequestParam("image") MultipartFile imageFile) {
 
-        return "redirect:/new-form";
+        String returnSite = "redirect:/new-form";
+
+        if (bindingResult.hasErrors()){
+            returnSite = "new-article-form";
+            return returnSite;
+        }
+
+        try{
+            String imagePath = imageService.saveData(imageFile);
+            articleDto.setPicture(imagePath);
+            articleService.saveArticle(articleDto);
+        } catch (IOException e) {
+            throw new NoSuchElementException(e);
+        }
+
+
+        return returnSite;
     }
 
     /**
      * show edit article form
-     * @param articleId
-     * @param model
-     * @return
+     * @param articleId Long
+     * @param model Model
+     * @return String
      */
     @GetMapping("/edit-form/{id}")
     String editArticle(@PathVariable("id") Long articleId, Model model) {
@@ -67,17 +90,30 @@ public class ArticleController {
 
     /**
      * update article
-     * @param articleDto
-     * @param bindingResult
-     * @return
+     * @param articleDto ArticleDto
+     * @param bindingResult BindingResult
+     * @return String
      */
     @RequestMapping(
             value = "/edit-form/update",
             method = {RequestMethod.PATCH, RequestMethod.POST}
     )
-    String updateArticle(@Valid @ModelAttribute("editArticle") ArticleDto articleDto, BindingResult bindingResult) {
+    String updateArticle(@Valid @ModelAttribute("editArticle") ArticleDto articleDto,
+                         @RequestParam("image") MultipartFile imageFile,
+                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             return "edit-article-form";
+        }
+
+        if (imageFile != null) {
+            try {
+                imageService.deleteData(articleDto.getPicture());
+
+                String imagePath = imageService.saveData(imageFile);
+                articleDto.setPicture(imagePath);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         articleService.updateArticle(articleDto);
@@ -87,14 +123,24 @@ public class ArticleController {
 
     /**
      * delete article
-     * @param id id form
-     * @return
+     * @param id Long
+     * @return String
      */
     @RequestMapping(
             value = "/all-user-articles/delete/{id}",
             method = {RequestMethod.DELETE, RequestMethod.GET}
     )
     String deleteArticle(@PathVariable("id") Long id) {
+        try {
+            if (articleService.takeArticleById(id).isPresent()) {
+                ArticleDto articleDto = articleService.takeArticleById(id).get();
+
+                imageService.deleteData(articleDto.getPicture());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         articleService.deleteArticle(id);
 
         return "redirect:/all-user-articles";
@@ -102,8 +148,8 @@ public class ArticleController {
 
     /**
      * show all current user article
-     * @param model
-     * @return
+     * @param model Model
+     * @return String
      */
     @GetMapping("/all-user-articles")
     String allUserArticles(Model model) {
@@ -117,9 +163,9 @@ public class ArticleController {
 
     /**
      * show single article
-     * @param articleId
-     * @param model
-     * @return
+     * @param articleId Long
+     * @param model Model
+     * @return String
      */
     @GetMapping("/article/{id}")
     String singleArticle(@PathVariable("id") Long articleId, Model model) {
@@ -135,8 +181,8 @@ public class ArticleController {
 
     /**
      * show all approved articles
-     * @param model
-     * @return
+     * @param model Model
+     * @return String
      */
     @GetMapping("/all-approved")
     String allApprovedArticles(Model model) {
@@ -150,8 +196,8 @@ public class ArticleController {
 
     /**
      * show all unapproved articles
-     * @param model
-     * @return
+     * @param model Model
+     * @return String
      */
     @GetMapping("/all-unapproved")
     String allUnapprovedArticles(Model model) {
@@ -165,8 +211,8 @@ public class ArticleController {
 
     /**
      * approve a article
-     * @param articleId
-     * @return
+     * @param articleId Long
+     * @return String
      */
     @RequestMapping(
             value = "/all-unapproved-articles/approve/{id}",
