@@ -9,4 +9,4 @@ spring:
   liquibase:
     change-log: classpath:dbChangeLog/master.xml
 
-
+staticContentDirectory: "/src/main/resources/static/images/"
