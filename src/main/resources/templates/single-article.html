@@ -10,10 +10,10 @@
       <td><a th:text="*{title}" type="text"></a></td>
     </tr>
     <tr>
-      <td><a th:date="*{date}" type="date"></a></td>
+      <td><a>Data wydania: </a><a th:text="*{date}" type="text"></a></td>
     </tr>
     <tr>
-      <td><a th:text="*{picture}" type="text"></a></td>
+      <td><img src="../static/images/" th:src="@{|/images/*{picture}|}"></td>
     </tr>
     <tr>
       <td><a th:text="*{description}" type="text"></a></td>
