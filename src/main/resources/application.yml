@@ -5,8 +5,12 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
   liquibase:
     change-log: classpath:dbChangeLog/master.xml
 
-staticContentDirectory: "/src/main/resources/static/images/"
+  servlet:
+    multipart:
+      enabled: true
+
+staticImageDirectory: "/src/main/resources/images/"
