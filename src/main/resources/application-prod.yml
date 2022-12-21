@@ -1,5 +1,5 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/engineerProject
-    username: postgres
+    url: jdbc:mariadb://localhost:3306/engineer_project
+    username: root
     password: root
