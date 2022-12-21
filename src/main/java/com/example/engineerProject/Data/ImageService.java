@@ -15,7 +15,7 @@ import java.util.Objects;
 @Service
 public class ImageService implements Data{
 
-    @Value("${staticContentDirectory}")
+    @Value("${staticImageDirectory}")
     private String IMAGES_PATH;
 
     public String UPLOAD_DIRECTORY = System.getProperty("user.dir");
