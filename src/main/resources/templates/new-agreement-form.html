@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="fragments::head(title='Dodaj Umowę')"></head>
 <body>
-<h1>Dodaj nową umowę</h1>
-<form method="post" enctype="multipart/form-data" th:action="@{|/add-agreement/save|}">
-  <table>
-    <tr>
-      <td>Umowa w formacie ".pdf": </td>
-      <td><input type="file" name="pdfFile" multiple required></td>
-    </tr>
-  </table>
-  <button type="submit">Wprowadź umowę do systemu</button>
-</form>
+<header th:replace="fragments::header"></header>
+
+<h2>Dodaj nową umowę</h2>
+<br>
+<main class="form-layout">
+  <form class="row g-3" method="post" enctype="multipart/form-data" th:action="@{|/add-agreement/save|}">
+
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Umowa w formacie ".pdf"</label>
+      <input  class="form-control" type="file" name="pdfFile" id="formFile" multiple required>
+    </div>
+    <button class="btn btn-primary" type="submit">Wprowadź umowę do systemu</button>
+  </form>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>

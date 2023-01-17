@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Agent articles</title>
-</head>
+<head th:replace="fragments::head(title='Moje artykuły')"></head>
 <body>
-<table th:remove="all-but-first" th:each="article: ${articles}">
-    <tr>
-        <td><a href="#" th:href="@{|/article/${article.id}|}" th:text="|${article.title}|"></a></td>
-        <td><a href="#" th:href="@{|/edit-form/${article.id}|}">Edytuj</a></td>
-        <td><a href="#" th:href="@{|/all-user-articles/delete/${article.id}|}">Usuń</a></td>
-    </tr>
-    <tr>
-        <td><a href="#">title</a></td>
-        <td><a href="#">Usuń</a></td>
-        <td><a href="#">edytuj</a></td>
+<header th:replace="fragments::header"></header>
 
-    </tr>
-</table>
+<main  class="td_to_show">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td><a>Tytuł</a></td>
+            <td><a>Edytuj</a></td>
+            <td><a>Usuń</a></td>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first" th:each="article: ${articles}">
+            <tr>
+                <td><a href="#" th:href="@{|/article/${article.id}|}" th:text="|${article.title}|"></a></td>
+                <td><a href="#" th:href="@{|/edit-form/${article.id}|}">Edytuj</a></td>
+                <td><a href="#" th:href="@{|/all-user-articles/delete/${article.id}|}">Usuń</a></td>
+            </tr>
+            <tr>
+                <td><a href="#">title</a></td>
+                <td><a href="#">Usuń</a></td>
+                <td><a href="#">edytuj</a></td>
+
+            </tr>
+        </tbody>
+
+    </table>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>

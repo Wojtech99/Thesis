@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>user info</title>
-</head>
+<head th:replace="fragments::head(title='Panel Urzytkownika')"></head>
 <body>
-<table th:object="${user}">
+<header th:replace="fragments::header"></header>
+
+<main  class="td_to_show">
+<table class="table table-striped" th:object="${user}">
   <tr>
     <td>Imię: </td>
     <td><a th:text="|${user.firstName}|"></a></td>
@@ -24,6 +24,7 @@
   </tr>
 </table>
 <p><a href="#" th:href="@{|/user/update-form|}">Edytuj informacje</a></p>
-<p><a href="#" th:href="@{|/change-password|}">Zmień Hasło</a></p>
+</main>
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>

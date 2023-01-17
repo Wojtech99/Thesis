@@ -5,7 +5,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
   liquibase:
     change-log: classpath:dbChangeLog/master.xml
 
@@ -13,4 +13,4 @@ spring:
     multipart:
       enabled: true
 
-staticImageDirectory: "/src/main/resources/images/"
+staticImageDirectory: "/src/main/resources/static/images/"

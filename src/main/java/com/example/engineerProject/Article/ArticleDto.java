@@ -10,11 +10,11 @@ import java.util.Objects;
 public class ArticleDto {
     private Long id;
     @NotNull
-    @Size(min = 3, max = 50)
+    @Size(min = 3, max = 150)
     private String title;
     private String picture;
     @NotNull
-    @Size(max = 1500)
+    @Size(max = 5500)
     private String description;
     private Date date;
     private Boolean approvedByManager;

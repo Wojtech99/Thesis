@@ -12,7 +12,8 @@ public class Agreement {
     private String name;
     private String type;
     private Date uploadDate;
-    @Lob()
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] bytes;
 
     public Agreement(){}

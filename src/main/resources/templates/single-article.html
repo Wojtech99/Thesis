@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="fragments::head(title='Artykuł')"></head>
 <body>
-  <table th:object="${article}">
+<header th:replace="fragments::header"></header>
+
+<main  class="td_to_show">
+  <table class="table table-striped" th:object="${article}">
     <tr>
       <td><a th:text="*{title}" type="text"></a></td>
     </tr>
@@ -13,11 +13,13 @@
       <td><a>Data wydania: </a><a th:text="*{date}" type="text"></a></td>
     </tr>
     <tr>
-      <td><img src="../static/images/" th:src="@{|/images/*{picture}|}"></td>
+      <td><img class="articlePhoto" src="../static/images/" th:src="@{|/images/${article.picture}|}"></td>
     </tr>
     <tr>
       <td><a th:text="*{description}" type="text"></a></td>
     </tr>
   </table>
+</main>
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>

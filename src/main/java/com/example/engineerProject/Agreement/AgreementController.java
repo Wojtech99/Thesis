@@ -1,6 +1,5 @@
 package com.example.engineerProject.Agreement;
 
-import jakarta.annotation.Resource;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -10,10 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -28,11 +24,10 @@ public class AgreementController {
 
     /**
      * show new agreement form
-     * @param model Model
      * @return String
      */
     @GetMapping("/add-agreement")
-    String addAgreementPage(Model model) {
+    String addAgreementPage() {
         return "new-agreement-form";
     }
 

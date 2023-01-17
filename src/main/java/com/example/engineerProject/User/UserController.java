@@ -67,7 +67,7 @@ public class UserController {
      */
     @RequestMapping(
             value = "/agent/save",
-            method = {RequestMethod.POST, RequestMethod.POST}
+            method = {RequestMethod.POST}
     )
     String saveNewAgent(@Valid @ModelAttribute("agent") AppUserDto appUserDto, BindingResult bindingResult){
         if (bindingResult.hasErrors()){

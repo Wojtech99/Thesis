@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>New Article form</title>
-</head>
+<head th:replace="fragments::head(title='Dodaj Artykuł')"></head>
 <body>
+<header th:replace="fragments::header"></header>
+
+
 <h2>Dodaj nowy artykuł</h2>
-<form method="post" enctype="multipart/form-data" th:action="@{|/new-form/save|}" th:object="${articleToSave}">
-    <table>
-        <tr>
-            <td>tytuł:</td>
-            <td><input th:field="*{title}" type="text"></td>
-            <td><p th:errors="*{title}" class="error">Tutaj jest Błąd 1</p><td>
-        </tr>
-        <tr>
-            <td>opis nieruchomości</td>
-            <td><input th:field="*{description}" type="text"></td>
-            <td><p th:errors="*{description}" class="error">Tutaj jest Błąd 3</p><td>
-        </tr>
-        <tr>
-            <td>Obraz: </td>
-            <td><input type="file" name="image"></td>
-        </tr>
-    </table>
-    <button type="submit">Zapisz Artykuł</button>
-</form>
+<br>
+<main class="form-layout">
+    <form class="row g-3" method="post" enctype="multipart/form-data" th:action="@{|/new-form/save|}" th:object="${articleToSave}">
+        <div class="form-floating mb-3">
+            <input type="text" th:field="*{title}" class="form-control" id="validationCustom01" required>
+            <label for="validationCustom01" class="form-label">Tytuł</label>
+            <div th:errors="*{title}" class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <div class="form-floating">
+            <textarea th:field="*{description}" class="form-control" id="textarea" style="height: 450px" required></textarea>
+            <label for="textarea">Opis</label>
+            <div th:errors="*{description}" class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Obraz</label>
+            <input  class="form-control" type="file" name="image" id="formFile">
+        </div>
+        <button class="btn btn-primary" type="submit">Zapisz Artykuł</button>
+    </form>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>

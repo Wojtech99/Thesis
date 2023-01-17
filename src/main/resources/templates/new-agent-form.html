@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>new Agent form</title>
-</head>
+<head th:replace="fragments::head(title='Stwórz Agenta')"></head>
 <body>
+<header th:replace="fragments::header"></header>
+
 <h2>Dodaj nowego agenta</h2>
-<form method="post" th:action="@{/agent/save}" th:object="${agent}">
-    <table>
-        <tr>
-            <td>Imię:</td>
-            <td><input th:field="*{firstName}" type="text"></td>
-            <td><p th:errors="*{firstName}" class="error">Tutaj jest Błąd 1</p><td>
-        </tr>
-        <tr>
-            <td>Nazwisko: </td>
-            <td><input th:field="*{lastName}" type="text"></td>
-            <td><p th:errors="*{lastName}" class="error">Tutaj jest Błąd 2</p><td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td><input th:field="*{email}" type="text"></td>
-            <td><p th:errors="*{email}" class="error">Tutaj jest Błąd 3</p><td>
-        </tr>
-        <tr>
-            <td>Hasło:</td>
-            <td><input th:field="*{password}" type="text"></td>
-            <td><p th:errors="*{password}" class="error">Tutaj jest Błąd 4</p><td>
-        </tr>
-    </table>
-    <button type="submit">Stwórz Agenta</button>
-</form>
+<br>
+<main class="form-layout">
+    <form class="row g-3" method="post" th:action="@{/agent/save}" th:object="${agent}">
+        <div class="form-floating mb-3">
+            <input type="text" th:field="*{firstName}" class="form-control" id="validationCustom02">
+            <label for="validationCustom02" class="form-label">Imię</label>
+            <div th:errors="*{firstName}" class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" th:field="*{lastName}" class="form-control" id="validationCustom03">
+            <label for="validationCustom03" class="form-label">Nazwisko</label>
+            <div th:errors="*{lastName}" class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" th:field="*{email}" class="form-control" id="validationCustom01">
+            <label for="validationCustom01" class="form-label">Email</label>
+            <div th:errors="*{email}" class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" th:field="*{password}" class="form-control" id="validationCustom04">
+            <label for="validationCustom04" class="form-label">Hasło</label>
+            <div th:errors="*{password}" class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Stwórz Agenta</button>
+    </form>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>

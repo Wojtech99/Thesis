@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="fragments::head(title='Ogłoszenia')"></head>
 <body>
-<table th:remove="all-but-first" th:each="article: ${articles}">
-    <tr>
-        <td><a th:text="|${article.title}|"></a></td>
-        <td><a href="#" th:href="@{|/article/${article.id}|}">Zobacz</a></td>
-    </tr>
-    <tr>
-        <td><a href="#">
-            title</a></td>
-        <td><a href="#">Zobacz</a></td>
-    </tr>
+<header th:replace="fragments::header"></header>
+
+<main  class="td_to_show">
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td><a>Tytuł</a></td>
+            <td><a>Zobacz artykuł</a></td>
+        </tr>
+    </thead>
+    <tbody th:remove="all-but-first" th:each="article: ${articles}">
+        <tr>
+            <td><a th:text="|${article.title}|"></a></td>
+            <td><a href="#" th:href="@{|/article/${article.id}|}">Zobacz</a></td>
+        </tr>
+        <tr>
+            <td><a href="#">title</a></td>
+            <td><a href="#">Zobacz</a></td>
+        </tr>
+    </tbody>
+
 </table>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>

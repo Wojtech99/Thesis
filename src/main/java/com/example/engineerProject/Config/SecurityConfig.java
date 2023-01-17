@@ -16,7 +16,9 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/").permitAll()
+                .requestMatchers("/images/**", "/styles/**").permitAll()
                 .anyRequest().authenticated());
+
 
         http.formLogin(login -> login.loginPage("/login")
                 .permitAll());

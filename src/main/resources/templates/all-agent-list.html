@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>all agents</title>
-</head>
+<head th:replace="fragments::head(title='Dodaj Kategorie')"></head>
 <body>
-<table th:remove="all-but-first" th:each="agent: ${agentList}">
-    <tr>
-        <td><a th:text="|${agent.firstName}|"></a></td>
-        <td><a th:text="|${agent.lastName}|"></a></td>
-        <td><a th:text="|${agent.email}|"></a></td>
-        <td><a th:text="|${agent.phoneNumber}|"></a></td>
-        <td><a href="#" th:href="@{|/agent-List/delete/${agent.email}|}">Usuń</a></td>
-    </tr>
-    <tr>
-        <td><a>first name</a></td>
-        <td><a>last name</a></td>
-        <td><a>email</a></td>
-        <td><a>phone number</a></td>
-        <td><a href="#">Usuń</a></td>
-    </tr>
-</table>
+<header th:replace="fragments::header"></header>
+
+
+<main class="td_to_show">
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <td><a>Imię</a></td>
+                <td><a>Nazwisko</a></td>
+                <td><a>Email</a></td>
+                <td><a>Numer telefonu</a></td>
+                <td><a>Usuń</a></td>
+            </tr>
+        </thead>
+        <tbody th:remove="all-but-first" th:each="agent: ${agentList}">
+            <tr>
+                <td><a th:text="|${agent.firstName}|"></a></td>
+                <td><a th:text="|${agent.lastName}|"></a></td>
+                <td><a th:text="|${agent.email}|"></a></td>
+                <td><a th:text="|${agent.phoneNumber}|"></a></td>
+                <td><a href="#" th:href="@{|/agent-List/delete/${agent.email}|}">Usuń</a></td>
+            </tr>
+            <tr>
+                <td><a>first name</a></td>
+                <td><a>last name</a></td>
+                <td><a>email</a></td>
+                <td><a>phone number</a></td>
+                <td><a href="#">Usuń</a></td>
+            </tr>
+        </tbody>
+
+    </table>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>

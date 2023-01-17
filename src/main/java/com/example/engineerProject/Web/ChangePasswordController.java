@@ -19,10 +19,7 @@ public class ChangePasswordController {
     }
 
     @GetMapping("/change-password")
-    String changePasswordForm(Model model) {
-        model.addAttribute("newPassword", "");
-        model.addAttribute("repeatNewPassword", "");
-
+    String changePasswordForm() {
         return "change-password";
     }
 

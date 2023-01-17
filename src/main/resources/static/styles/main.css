@@ -1,0 +1,50 @@
+body {
+background-color: #f9f0e0;
+}
+
+.td_to_show {
+    margin-left: 10px;
+    max-width: 60%;
+    min-width: 36%;
+    width: fit-content;
+}
+
+main {
+    top: 10%;
+}
+
+.articlePhoto {
+    max-width: 60%;
+    max-height: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* header */
+.Header {
+    position: relative;
+    z-index: 9;
+}
+
+/* form layout */
+.form-layout {
+    margin: auto;
+    max-width: 60%;
+    min-width: 450px;
+    position: relative;
+}
+
+/* footer */
+.Footer_text{
+    margin-bottom: auto;
+    font-size: medium;
+    font-style: italic;
+}
+
+.Footer {
+    position: relative;
+    bottom: 1%;
+    left: 1%;
+}
+

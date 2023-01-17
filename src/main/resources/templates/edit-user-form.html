@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>edit user form</title>
-</head>
+<head th:replace="fragments::head(title='Edytuj Artykuł')"></head>
 <body>
-<h1>Edytuj Profil</h1>
-<form method="post" th:action="@{|/user/update-form/update|}" th:object="${userToEdit}">
-    <table>
-        <tr>
-            <td>email:</td>
-            <td><input th:field="*{email}" th:text="*{email}" type="hidden"></td>
-        </tr>
-        <tr>
-            <td>Imię:</td>
-            <td><input th:field="*{firstName}" type="text"></td>
-            <td><p th:errors="*{firstName}" class="error">Tutaj jest Błąd 1</p><td>
-        </tr>
-        <tr>
-            <td>Nazwisko: </td>
-            <td><input th:field="*{lastName}" type="text"></td>
-            <td><p th:errors="*{lastName}" class="error">Tutaj jest Błąd 2</p><td>
-        </tr>
-        <tr>
-            <td>Numer telefonu:</td>
-            <td><input th:field="*{phoneNumber}" type="text"></td>
-            <td><p th:errors="*{phoneNumber}" class="error">Tutaj jest Błąd 3</p><td>
-        </tr>
-    </table>
-    <button type="submit">Zapisz</button>
-</form>
+<header th:replace="fragments::header"></header>
+
+<h2>Edytuj Profil</h2>
+<br>
+<main class="form-layout">
+    <form class="row g-3" method="post" th:action="@{|/user/update-form/update|}" th:object="${userToEdit}">
+        <div class="form-floating mb-3">
+            <p>Email:
+            <input th:field="*{email}" th:text="*{email}" type="hidden" >
+            </p>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" th:field="*{firstName}" class="form-control" id="validationCustom02">
+            <label for="validationCustom02" class="form-label">Imię</label>
+            <div th:errors="*{firstName}" class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" th:field="*{lastName}" class="form-control" id="validationCustom03">
+            <label for="validationCustom03" class="form-label">Nazwisko</label>
+            <div th:errors="*{lastName}" class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" th:field="*{phoneNumber}" class="form-control" id="validationCustom04">
+            <label for="validationCustom04" class="form-label">Numer telefonu</label>
+            <div th:errors="*{phoneNumber}" class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Edytuj</button>
+    </form>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>
