@@ -99,7 +99,7 @@ public class ArticleController {
             method = {RequestMethod.PATCH, RequestMethod.POST}
     )
     String updateArticle(@Valid @ModelAttribute("editArticle") ArticleDto articleDto,
-                         @RequestParam("image") MultipartFile imageFile,
+                         @Param("image") MultipartFile imageFile,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             return "edit-article-form";

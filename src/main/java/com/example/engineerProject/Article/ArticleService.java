@@ -75,7 +75,7 @@ public class ArticleService {
             article.setTitle(articleDto.getTitle());
         }
 
-        if (!articleDto.getPicture().isEmpty()){
+        if (articleDto.getPicture() != null){
             article.setPicture(articleDto.getPicture());
         }
 

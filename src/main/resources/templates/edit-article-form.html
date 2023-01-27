@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="fragments::head(title='Edytuj Artykuł')"></head>
 <body>
-<h2>Edytuj artykuł</h2>
+<header th:replace="fragments::header"></header>
+
+<main>
 <form method="post" enctype="multipart/form-data" th:action="@{|/edit-form/update|}" th:object="${editArticle}">
   <table>
     <tr>
       <td>Id:</td>
-      <td><input th:field="*{id}" th:text="*{id}" type="hidden"></td>
+      <td><input th:field="*{id}" th:text="*{id}" type="hidden" ></td>
     </tr>
     <tr>
       <td>Tytuł:</td>
@@ -18,8 +17,8 @@
       <td><p th:errors="*{title}" class="error">Tutaj jest Błąd 1</p><td>
     </tr>
     <tr>
-      <td>Opis nieruchomości</td>
-      <td><input th:field="*{description}" type="text"></td>
+      <td>Opis</td>
+      <td><textarea th:field="*{description}" type="text"></textarea></td>
       <td><p th:errors="*{description}" class="error">Tutaj jest Błąd 3</p><td>
     </tr>
     <tr>
@@ -30,6 +29,38 @@
   </table>
   <button type="submit">Zapisz Artykuł</button>
 </form>
-<img src="../static/images/" th:src="@{|/images/${editArticle.picture}|}">
+</main>
+
+<h2>Edytuj artykuł</h2>
+<br>
+<section class="form-layout">
+    <form class="row g-3" method="post" enctype="multipart/form-data" th:action="@{|/edit-form/update|}" th:object="${editArticle}">
+        <div class="form-floating mb-3">
+            <p>Id:
+                <input th:field="*{id}" th:text="*{id}" type="hidden" >
+            </p>
+        </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" th:field="*{title}" class="form-control" id="validationCustom01" required>
+          <label for="validationCustom01" class="form-label">Tytuł</label>
+          <div th:errors="*{title}" class="invalid-feedback">
+            Please provide a valid city.
+          </div>
+        </div>
+        <div class="form-floating">
+          <textarea th:field="*{description}" class="form-control" id="textarea" style="height: 450px" required></textarea>
+          <label for="textarea">Opis</label>
+        </div>
+        <img class="articlePhoto" src="../static/images/" th:src="@{|/images/${editArticle.picture}|}">
+        <div class="mb-3">
+          <label for="formFile" class="form-label" th:field="*{picture}" th:text="*{picture}">Obraz</label>
+          <input  class="form-control" type="file" name="image" id="formFile">
+        </div>
+      <button class="btn btn-primary" type="submit">Zapisz Artykuł</button>
+    </form>
+</section>
+
+<footer th:replace="fragments::footer"></footer>
 </body>
 </html>
