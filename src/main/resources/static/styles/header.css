@@ -1,89 +1,50 @@
-/* ------------------------CZĘŚĆ-GÓRNA-MENU------------------------ */
-
-/* wygląd głównego elementu - ol */
-ol {
-    list-style-type:none;
-    padding:0;
-    margin:0;
-    background-color: #f9f0e0;
-    font-size:16px;
-    height:2em;
-    line-height:2em;
-    text-align:center;
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
 
-/* wygląd wszystkich elementów - a - znajdujących się w elemencie - ol */
-ol a {
-    display:block;
-    text-decoration:none;
-    color:#000;
-    padding:0 5px;
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
 }
 
-/* wygląd elementów - li - wszystkich dzieci elementu - ol */
-ol > li {
-    float:left;
-    width:200px;
-    margin-left:1px;
-    background-color: limegreen;
-    height:2em;
+.b-example-divider {
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
 }
 
-/* wygląd elementu - li - pierwszego dziecka elementu - ol */
-ol > li:first-child {
-    margin-left:0;
+.b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
 }
 
-/* wygląd elementów - li - wszystkich dzieci elementu - ol - po najechaniu kursorem myszki na element - li */
-ol > li:hover {
-    background-color:#EEE;
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
 }
 
-/* wygląd elementu - a - dziecka elementu - li - będącego dzieckiem elementu - ol - po najechaniu kursorem myszki na element - li */
-ol > li:hover > a {
-    color: dimgrey;
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
 }
 
-/* wygląd elementu - ul - dziecka elementu - li - będącego dzieckiem elementu - ol - po najechaniu kursorem myszki na element - li */
-ol > li:hover > ul {
-    display:block;
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
-
-/* ------------------------CZĘŚĆ-ROZWIJANA-MENU------------------------ */
-
-/* wygląd głównych rozwijanych elementów - ul */
-ol > li > ul {
-    display:none;
-    list-style-type:none;
-    padding:0;
-    margin:0;
-}
-
-/* wygląd elementu - li - w części rozwijanej */
-ol > li > ul > li {
-    position:relative;
-    background-color:#EEE;
-}
-
-/* wygląd elementu - a - w części rozwijanej */
-ol > li > ul > li > a {
-    border-top:1px solid #FFF;
-}
-
-/* wygląd elementu - li - w części rozwijanej, po najechaniu kursorem myszki na dany element - li */
-ol > li > ul > li:hover {
-    background-color:#DDD;
-}
-
-/* wygląd elementu - a - w części rozwijanej, po najechaniu kursorem myszki na element - li */
-ol > li > ul > li:hover > a {
-    color:dimgrey;
-}
-
-
-
-
-
-
-
-

@@ -1,9 +1,9 @@
 body {
-background-color: #f9f0e0;
+background-color: #fff;
 }
 
 .td_to_show {
-    margin-left: 10px;
+    margin: auto;
     max-width: 60%;
     min-width: 36%;
     width: fit-content;

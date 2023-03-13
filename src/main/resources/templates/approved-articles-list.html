@@ -5,11 +5,11 @@
 <header th:replace="fragments::header"></header>
 
 <main  class="td_to_show">
-<table class="table table-striped">
+<table class="table table-hover table-light">
     <thead>
         <tr>
             <td><a>Tytuł</a></td>
-            <td><a>Zobacz artykuł</a></td>
+            <td><a> </a></td>
         </tr>
     </thead>
     <tbody th:remove="all-but-first" th:each="article: ${articles}">

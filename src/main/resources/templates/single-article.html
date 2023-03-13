@@ -5,18 +5,21 @@
 <header th:replace="fragments::header"></header>
 
 <main  class="td_to_show">
-  <table class="table table-striped" th:object="${article}">
+  <table class="table table-borderless table-light" th:object="${article}">
     <tr>
-      <td><a th:text="*{title}" type="text"></a></td>
-    </tr>
-    <tr>
-      <td><a>Data wydania: </a><a th:text="*{date}" type="text"></a></td>
+      <td><h3 th:text="*{title}" type="text"></h3></td>
     </tr>
     <tr>
       <td><img class="articlePhoto" src="../static/images/" th:src="@{|/images/${article.picture}|}"></td>
     </tr>
     <tr>
       <td><a th:text="*{description}" type="text"></a></td>
+    </tr>
+    <tr>
+      <td><a>Data wydania: </a><a th:text="*{date}" type="text"></a></td>
+    </tr>
+    <tr>
+      <td><a>Autor: </a><a th:text="|*{user.firstName}|" type="text"></a><a th:text="| *{user.lastName}|" type="text"></a></td>
     </tr>
   </table>
 </main>

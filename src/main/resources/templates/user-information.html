@@ -5,7 +5,7 @@
 <header th:replace="fragments::header"></header>
 
 <main  class="td_to_show">
-<table class="table table-striped" th:object="${user}">
+<table class="table table-light" th:object="${user}">
   <tr>
     <td>Imię: </td>
     <td><a th:text="|${user.firstName}|"></a></td>
