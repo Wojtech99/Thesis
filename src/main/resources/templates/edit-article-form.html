@@ -54,7 +54,7 @@
         </div>
         <img class="articlePhoto" src="../static/images/" th:src="@{|/images/${editArticle.picture}|}">
         <div class="mb-3">
-          <label for="formFile" class="form-label" th:field="*{picture}" th:text="*{picture}">Obraz</label>
+          <input th:field="*{picture}" th:text="*{picture}" type="hidden">
           <input  class="form-control" type="file" name="image" id="formFile">
         </div>
       <button class="btn btn-primary" type="submit">Zapisz Artykuł</button>
