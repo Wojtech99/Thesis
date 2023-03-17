@@ -1,35 +1,39 @@
-package com.example.engineerProject.Announcement;
+package com.example.engineerProject.Announcement.AnnouncementDtoes;
 
+import com.example.engineerProject.Announcement.AnnouncementDto;
 import com.example.engineerProject.Announcement.AnnouncementEnum.AnnouncementType;
-import com.example.engineerProject.Announcement.Photo.Photo;
+
 import com.example.engineerProject.User.AppUser;
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
-import java.util.List;
-
-@Entity(name = "announcement")
-public class Announcement {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+public class FlatDtoRent extends AnnouncementDto {
     private AppUser user;
-    @JoinColumn(name = "announcement_type")
+    @NotNull(message = "This field can not be null")
+    private Long id;
     private AnnouncementType announcementType;
-    private Boolean isHighlighted;
+    @NotNull(message = "This field can not be null")
     private String action;
+    @NotNull(message = "This field can not be null")
     private String regionName;
+    @NotNull(message = "This field can not be null")
     private String districtName;
+    @NotNull(message = "This field can not be null")
     private String communeName;
+    @NotNull(message = "This field can not be null")
     private String cityName;
     private String street;
+    @NotNull(message = "This field can not be null")
     private Integer idCategory;
+    @NotNull(message = "This field can not be null")
     private Integer idAdType;
+    @NotNull(message = "This field can not be null")
     private Integer idAgent;
+    @NotNull(message = "This field can not be null")
     private Float area;
     private Float areaUse;
+    @NotNull(message = "This field can not be null")
     private Float price;
+    @NotNull(message = "This field can not be null")
     private Float pricePM;
     private Integer rooms;
     private Integer floor;
@@ -39,11 +43,13 @@ public class Announcement {
     private Integer yearBuilt;
     private Integer idConditionType;
     private Integer isGarageParking;
+    @NotNull(message = "This field can not be null")
     private String description;
     private Integer idAvailableFromType;
+    @NotNull(message = "This field can not be null")
     private Integer availableFromYear;
+    @NotNull(message = "This field can not be null")
     private Integer availableFromMonth;
-    private Integer idOwnershipType;
     private Integer isBalcony;
     private Integer isBasement;
     private Integer levels;
@@ -52,30 +58,9 @@ public class Announcement {
     private Float pledge;
     private Integer idPledgeType;
     private String additionalCharges;
-    private Float areaPlot;
-    private Integer isMWater;
-    private Integer idWaterType;
-    private Integer idSewageType;
-    private Integer isMElectricity;
-    private Integer isEnclosure;
-    private Integer idPlotAccessType;
-    private Integer idPlotShapeType;
-    private Integer idPlotType;
-    private Integer isPlotAccessType;
-    private Integer isMSewage;
-    private Integer idBPDestType;
-    private Integer idEntryType;
-    private Integer isOwnBgGarageParking;
-    private Integer idRoomCapacity;
-    private Integer idAdCreator;
-    private Integer isOvnerInHouse;
 
-    @OneToMany
-    @JoinColumn(name = "photo_id")
-    private List<Photo> photos;
-
-    public Announcement(){
-        this.isHighlighted = false;
+    public FlatDtoRent() {
+        this.announcementType = AnnouncementType.FLAT_RENT;
     }
 
     public AnnouncementType getAnnouncementType() {
@@ -86,12 +71,12 @@ public class Announcement {
         this.announcementType = announcementType;
     }
 
-    public Boolean getHighlighted() {
-        return isHighlighted;
+    public AppUser getUser() {
+        return user;
     }
 
-    public void setHighlighted(Boolean highlighted) {
-        isHighlighted = highlighted;
+    public void setUser(AppUser user) {
+        this.user = user;
     }
 
     public Long getId() {
@@ -100,14 +85,6 @@ public class Announcement {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public AppUser getUser() {
-        return user;
-    }
-
-    public void setUser(AppUser user) {
-        this.user = user;
     }
 
     public String getAction() {
@@ -310,14 +287,6 @@ public class Announcement {
         this.availableFromMonth = availableFromMonth;
     }
 
-    public Integer getIdOwnershipType() {
-        return idOwnershipType;
-    }
-
-    public void setIdOwnershipType(Integer idOwnershipType) {
-        this.idOwnershipType = idOwnershipType;
-    }
-
     public Integer getIsBalcony() {
         return isBalcony;
     }
@@ -342,6 +311,7 @@ public class Announcement {
         this.levels = levels;
     }
 
+
     public Integer getBathRooms() {
         return bathRooms;
     }
@@ -357,6 +327,7 @@ public class Announcement {
     public void setIsFurnished(Integer isFurnished) {
         this.isFurnished = isFurnished;
     }
+
 
     public Float getPledge() {
         return pledge;
@@ -374,159 +345,5 @@ public class Announcement {
         this.idPledgeType = idPledgeType;
     }
 
-    public String getAdditionalCharges() {
-        return additionalCharges;
-    }
 
-    public void setAdditionalCharges(String additionalCharges) {
-        this.additionalCharges = additionalCharges;
-    }
-
-    public Float getAreaPlot() {
-        return areaPlot;
-    }
-
-    public void setAreaPlot(Float areaPlot) {
-        this.areaPlot = areaPlot;
-    }
-
-    public Integer getIsMWater() {
-        return isMWater;
-    }
-
-    public void setIsMWater(Integer isMWater) {
-        this.isMWater = isMWater;
-    }
-
-    public Integer getIdWaterType() {
-        return idWaterType;
-    }
-
-    public void setIdWaterType(Integer idWaterType) {
-        this.idWaterType = idWaterType;
-    }
-
-    public Integer getIdSewageType() {
-        return idSewageType;
-    }
-
-    public void setIdSewageType(Integer idSewageType) {
-        this.idSewageType = idSewageType;
-    }
-
-    public Integer getIsMElectricity() {
-        return isMElectricity;
-    }
-
-    public void setIsMElectricity(Integer isMElectricity) {
-        this.isMElectricity = isMElectricity;
-    }
-
-    public Integer getIsEnclosure() {
-        return isEnclosure;
-    }
-
-    public void setIsEnclosure(Integer isEnclosure) {
-        this.isEnclosure = isEnclosure;
-    }
-
-    public Integer getIdPlotAccessType() {
-        return idPlotAccessType;
-    }
-
-    public void setIdPlotAccessType(Integer idPlotAccessType) {
-        this.idPlotAccessType = idPlotAccessType;
-    }
-
-    public Integer getIdPlotShapeType() {
-        return idPlotShapeType;
-    }
-
-    public void setIdPlotShapeType(Integer idPlotShapeType) {
-        this.idPlotShapeType = idPlotShapeType;
-    }
-
-    public Integer getIdPlotType() {
-        return idPlotType;
-    }
-
-    public void setIdPlotType(Integer idPlotType) {
-        this.idPlotType = idPlotType;
-    }
-
-    public Integer getIsPlotAccessType() {
-        return isPlotAccessType;
-    }
-
-    public void setIsPlotAccessType(Integer isPlotAccessType) {
-        this.isPlotAccessType = isPlotAccessType;
-    }
-
-    public Integer getIsMSewage() {
-        return isMSewage;
-    }
-
-    public void setIsMSewage(Integer isMSewage) {
-        this.isMSewage = isMSewage;
-    }
-
-    public Integer getIdBPDestType() {
-        return idBPDestType;
-    }
-
-    public void setIdBPDestType(Integer idBPDestType) {
-        this.idBPDestType = idBPDestType;
-    }
-
-    public Integer getIdEntryType() {
-        return idEntryType;
-    }
-
-    public void setIdEntryType(Integer idEntryType) {
-        this.idEntryType = idEntryType;
-    }
-
-    public Integer getIsOwnBgGarageParking() {
-        return isOwnBgGarageParking;
-    }
-
-    public void setIsOwnBgGarageParking(Integer isOwnBgGarageParking) {
-        this.isOwnBgGarageParking = isOwnBgGarageParking;
-    }
-
-    public Integer getIdRoomCapacity() {
-        return idRoomCapacity;
-    }
-
-    public void setIdRoomCapacity(Integer idRoomCapacity) {
-        this.idRoomCapacity = idRoomCapacity;
-    }
-
-    public Integer getIdAdCreator() {
-        return idAdCreator;
-    }
-
-    public void setIdAdCreator(Integer idAdCreator) {
-        this.idAdCreator = idAdCreator;
-    }
-
-    public Integer getIsOvnerInHouse() {
-        return isOvnerInHouse;
-    }
-
-    public void setIsOvnerInHouse(Integer isOvnerInHouse) {
-        this.isOvnerInHouse = isOvnerInHouse;
-    }
-
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
-
-    public void addPhoto(Photo photo) {
-        this.photos.add(photo);
-    }
 }
