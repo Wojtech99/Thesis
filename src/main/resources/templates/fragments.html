@@ -33,7 +33,7 @@
             <a class="nav-link active" aria-current="page" href="#" th:href="@{|/|}">Strona Główna</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Ogłoszenia</a>
+            <a class="nav-link" href="#" th:href="@{|/announcements|}">Ogłoszenia</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" th:href="@{|/all-approved|}">Artykuły</a>
@@ -41,8 +41,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Panel agenta</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Dodaj ogłoszenie</a></li>
+              <li><a class="dropdown-item" href="#" th:href="@{|/new-announcement|}">Dodaj ogłoszenie</a></li>
               <li><a class="dropdown-item" href="#" th:href="@{|/new-form|}">Dodaj artykuł</a></li>
+              <li><a class="dropdown-item" href="#" th:href="@{|/all-user-announcement|}">Moje ogłoszenia</a></li>
               <li><a class="dropdown-item" href="#" th:href="@{|/all-user-articles|}">Moje artykuły</a></li>
             </ul>
           </li>
@@ -51,6 +52,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#" th:href="@{|/all-unapproved|}">Zatwierdź artykuły</a></li>
               <li><a class="dropdown-item" href="#" th:href="@{|/add-agreement|}">Dodaj umowę</a></li>
+              <li><a class="dropdown-item" href="#" th:href="@{|/choose-announcements|}">Wyróżnij ogłoszenia</a></li>
               <li><a class="dropdown-item" href="#" th:href="@{|/agent/register-form|}">Stwórz agenta</a></li>
               <li><a class="dropdown-item" href="#" th:href="@{|/show-agreements|}">Lista umów</a></li>
               <li><a class="dropdown-item" href="#" th:href="@{|/agents-list|}" >Lista agentów</a></li>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Ogłoszenie')"></head>
+<body>
+<header th:replace="fragments::header"></header>
+
+
+
+<main  class="td_to_show">
+  <table class="table table-borderless table-light" th:object="${announcement}">
+
+    <tr>
+      <td><h4 th:text="|Rodzaj Nieruchomości: *{announcementType.description}|" type="text"></h4></td>
+    </tr>
+
+    <tr th:each="photo : ${announcement.photos}">
+      <td><img class="announcementPhoto" src="../static/images/" th:src="@{|/images/${photo.name}|}"></td>
+    </tr>
+
+
+    <tr th:if="${!announcement.regionName.isEmpty()}">
+      <td><a th:text="|Nazwa wojewódzwtwa: *{regionName}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${!announcement.districtName.isEmpty()}">
+      <td><a th:text="|Nazwa powiatu: *{districtName}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${!announcement.communeName.isEmpty()}">
+      <td><a th:text="|Nazwa gminy: *{communeName}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${!announcement.cityName.isEmpty()}">
+      <td><a th:text="|Nazwa miejscowości: *{cityName}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${!announcement.street.isEmpty()}">
+      <td><a th:text="|Ulica: *{street}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.area != null}">
+      <td><a th:text="|Powierzchnia: *{area} m2|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.areaUse != null}">
+      <td><a th:text="|Powierzchnia użytkowa: *{areaUse} m2|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.price != null}">
+      <td><a th:text="|Cena: *{price}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.pricePM != null}">
+      <td><a th:text="|Cena za m2: *{pricePM}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.rooms != null}">
+      <td><a th:text="|Liczba pokoi: *{rooms}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.floor != null}">
+      <td><a th:text="|Piętro: |" type="text"></a>
+        <a th:if="*{floor == -1}">suterena</a>
+        <a th:if="*{floor == 0}">parter</a>
+        <a th:if="*{floor > 0}" th:text="*{floor}"></a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.totalFloors != null && announcement.totalFloors != 0}">
+      <td><a th:text="|Liczba pięter: *{totalFloors}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.isElevator != null}">
+      <td><a th:text="|Jest winda: |" type="text"></a>
+        <a th:if="*{isElevator == 1}">Tak</a>
+        <a th:if="*{isElevator == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idBuildingType != null && announcement.idBuildingType != 0}">
+      <td><a th:text="|Rodzaj budynku: |" type="text"></a>
+      <a th:if="*{idBuildingType == 1}">apartamentowiec</a>
+      <a th:if="*{idBuildingType == 2}">bliźniak</a>
+      <a th:if="*{idBuildingType == 3}">blok mieszkalny</a>
+      <a th:if="*{idBuildingType == 4}">dom wolnostojący</a>
+      <a th:if="*{idBuildingType == 5}">dom wielorodzinny</a>
+      <a th:if="*{idBuildingType == 6}">dworek/pałac</a>
+      <a th:if="*{idBuildingType == 7}">kamienica</a>
+      <a th:if="*{idBuildingType == 8}">dom letniskowy</a>
+      <a th:if="*{idBuildingType == 9}">rezydencja</a>
+      <a th:if="*{idBuildingType == 11}">dom szeregowy</a>
+      <a th:if="*{idBuildingType == 12}">budynek wolnostojący</a>
+      <a th:if="*{idBuildingType == 13}">kompleks budynków</a>
+      <a th:if="*{idBuildingType == 14}">hala</a>
+      <a th:if="*{idBuildingType == 15}">garaż</a>
+      <a th:if="*{idBuildingType == 16}">biurowiec</a>
+      <a th:if="*{idBuildingType == 17}">magazyn</a>
+      <a th:if="*{idBuildingType == 18}">gospodarstwo rolne</a>
+      <a th:if="*{idBuildingType == 19}">dom z funkcją usługową</a>
+      <a th:if="*{idBuildingType == 20}">siedlisko</a>
+      <a th:if="*{idBuildingType == 21}">obiekt handlowo-usługowy</a>
+      <a th:if="*{idBuildingType == 22}">loft</a>
+      <a th:if="*{idBuildingType == 23}">obiekt biurowo-handlowo-usługowy</a>
+      <a th:if="*{idBuildingType == 24}">centrum handlowe</a>
+      <a th:if="*{idBuildingType == 25}">piętro domu</a>
+      <a th:if="*{idBuildingType == 26}">część domu</a>
+      <a th:if="*{idBuildingType == 27}">oficyna</a>
+      <a th:if="*{idBuildingType == 28}">parking</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.yearBuilt != null}">
+      <td><a th:text="|Rok Budowy: *{yearBuilt}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.idConditionType != null && announcement.idConditionType != 0}">
+      <td><a th:text="|Stan nieruchomości: |" type="text"></a>
+        <a th:if="*{idConditionType == 3}">do odświeżenia</a>
+        <a th:if="*{idConditionType == 4}">do remontu</a>
+        <a th:if="*{idConditionType == 5}">do wykończenia</a>
+        <a th:if="*{idConditionType == 6}">deweloperski</a>
+        <a th:if="*{idConditionType == 7}">surowy zamknięty</a>
+        <a th:if="*{idConditionType == 8}">surowy otwarty</a>
+        <a th:if="*{idConditionType == 9}">rozpoczęta budowa</a>
+        <a th:if="*{idConditionType == 10}">nowy wykończony</a>
+        <a th:if="*{idConditionType == 13}">nowe wykończone</a>
+        <a th:if="*{idConditionType == 14}">dobry</a>
+        <a th:if="*{idConditionType == 15}">bardzo dobry</a>
+        <a th:if="*{idConditionType == 18}">wysoki standard</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.isGarageParking != null}">
+      <td><a th:text="|Jest miejsce parkingowe: |" type="text"></a>
+        <a th:if="*{isGarageParking == 1}">Tak</a>
+        <a th:if="*{isGarageParking == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr>
+      <td><a th:text="|Opis nieruchomości: *{description}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.idAvailableFromType != null && announcement.idAvailableFromType != 0}">
+      <td><a th:text="|Dostępność: |" type="text"></a>
+        <a th:if="*{idAvailableFromType == 2}">natychmiast</a>
+        <a th:if="*{idAvailableFromType == 3}">do uzgodnienia</a>
+        <a th:if="*{idAvailableFromType == 4}">1 miesiąc</a>
+        <a th:if="*{idAvailableFromType == 5}">2 miesiące</a>
+        <a th:if="*{idAvailableFromType == 6}">3 miesiące</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.availableFromYear != null && announcement.availableFromYear != 0}">
+      <td><a th:text="|Dostępność (rok): |" type="text"></a>
+        <a th:if="*{availableFromYear == 2015}">2015</a>
+        <a th:if="*{availableFromYear == 2016}">2016</a>
+        <a th:if="*{availableFromYear == 2017}">2017</a>
+        <a th:if="*{availableFromYear == 2018}">2018</a>
+        <a th:if="*{availableFromYear == 2019}">2019</a>
+        <a th:if="*{availableFromYear == 2020}">2020</a>
+        <a th:if="*{availableFromYear == 2021}">2021</a>
+        <a th:if="*{availableFromYear == 2022}">2022</a>
+        <a th:if="*{availableFromYear == 2023}">2023</a>
+        <a th:if="*{availableFromYear == 2024}">2024</a>
+        <a th:if="*{availableFromYear == 2025}">2025</a>
+        <a th:if="*{availableFromYear == 2026}">2026</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.availableFromMonth != null && announcement.availableFromMonth != 0}">
+      <td><a th:text="|Dostępność (miesiąc): |" type="text"></a>
+        <a th:if="*{availableFromMonth == 1}">styczeń</a>
+        <a th:if="*{availableFromMonth == 2}">luty</a>
+        <a th:if="*{availableFromMonth == 3}">marzec</a>
+        <a th:if="*{availableFromMonth == 4}">kwiecień</a>
+        <a th:if="*{availableFromMonth == 5}">maj</a>
+        <a th:if="*{availableFromMonth == 6}">czerwiec</a>
+        <a th:if="*{availableFromMonth == 7}">lipiec</a>
+        <a th:if="*{availableFromMonth == 8}">sierpień</a>
+        <a th:if="*{availableFromMonth == 9}">wrzesień</a>
+        <a th:if="*{availableFromMonth == 10}">październik</a>
+        <a th:if="*{availableFromMonth == 11}">listopad</a>
+        <a th:if="*{availableFromMonth == 12}">grudzień</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idOwnershipType != null && announcement.idOwnershipType != 0}">
+      <td><a th:text="|Forma własności: |" type="text"></a>
+        <a th:if="*{idOwnershipType == 2}">spółdzielcze własnościowe</a>
+        <a th:if="*{idOwnershipType == 5}">udział</a>
+        <a th:if="*{idOwnershipType == 7}">użytkowanie wieczyste</a>
+        <a th:if="*{idOwnershipType == 8}">własność</a>
+        <a th:if="*{idOwnershipType == 10}">dzierżawa</a>
+        <a th:if="*{idOwnershipType == 11}">akt własności ziemi</a>
+        <a th:if="*{idOwnershipType == 12}">inna</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.isBalcony != null}">
+      <td><a th:text="|Jest balkon: |" type="text"></a>
+        <a th:if="*{isBalcony == 1}">Tak</a>
+        <a th:if="*{isBalcony == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.isBasement != null}">
+      <td><a th:text="|Jest piwnica: |" type="text"></a>
+        <a th:if="*{isBasement == 1}">Tak</a>
+        <a th:if="*{isBasement == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.levels != null && announcement.levels != 0}">
+      <td><a th:text="|Liczba poziomów: |" type="text"></a>
+        <a th:if="*{levels == 1}">jednopoziomowe</a>
+        <a th:if="*{levels == 2}">dwupoziomowe</a>
+        <a th:if="*{levels == 3}">wielopoziomowe</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.bathRooms != null}">
+      <td><a th:text="|Liczba Łazienek: *{bathRooms}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.isFurnished != null}">
+      <td><a th:text="|Jest umeblowane: |" type="text"></a>
+        <a th:if="*{isFurnished == 1}">Tak</a>
+        <a th:if="*{isFurnished == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.pledge != null}">
+      <td><a th:text="|Kaucja (kwota): *{pledge} zł|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.idPledgeType != null && announcement.idPledgeType != 0}">
+      <td><a th:text="|Typ kaucji: |" type="text"></a>
+        <a th:if="*{idPledgeType == 1}">1-krotność czynszu</a>
+        <a th:if="*{idPledgeType == 2}">2-krotność czynszu</a>
+        <a th:if="*{idPledgeType == 3}">3-krotność czynszu</a>
+        <a th:if="*{idPledgeType == 4}">do uzgodnienia</a>
+        <a th:if="*{idPledgeType == 5}">gwarancja bankowa</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.pledge != null}">
+      <td><a th:text="|Dodatkowe opłaty: *{additionalCharges}|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.pledge != null}">
+      <td><a th:text="|Powierzchnia działki: *{areaPlot} m2|" type="text"></a></td>
+    </tr>
+
+    <tr th:if="${announcement.pledge != null}">
+      <td><a th:text="|Jest woda: |" type="text"></a>
+        <a th:if="*{isMWater == 1}">Tak</a>
+        <a th:if="*{isMWater == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idWaterType != null && announcement.idWaterType != 0}">
+      <td><a th:text="|Źródło wody pitnej: |" type="text"></a>
+        <a th:if="*{idWaterType == 1}">woda miejska / wodociąg</a>
+        <a th:if="*{idWaterType == 2}">studnia</a>
+        <a th:if="*{idWaterType == 4}">woda w drodze</a>
+        <a th:if="*{idWaterType == 5}">woda w granicy działki</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idSewageType != null && announcement.idSewageType != 0}">
+      <td><a th:text="|Sposób odprowadzenia ścieków: |" type="text"></a>
+        <a th:if="*{idSewageType == 1}">kanalizacja</a>
+        <a th:if="*{idSewageType == 2}">oczyszczalnia ścieków</a>
+        <a th:if="*{idSewageType == 3}">szambo</a>
+        <a th:if="*{idSewageType == 5}">oczyszczalnia przydomowa</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.isMElectricity != null}">
+      <td><a th:text="|Jest prąd: |" type="text"></a>
+        <a th:if="*{isMElectricity == 1}">Tak</a>
+        <a th:if="*{isMElectricity == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.isEnclosure != null}">
+      <td><a th:text="|Jest ogrodzenie: |" type="text"></a>
+        <a th:if="*{isEnclosure == 1}">Tak</a>
+        <a th:if="*{isEnclosure == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idPlotAccessType != null && announcement.idPlotAccessType != 0}">
+      <td><a th:text="|Dojazd do działki: |" type="text"></a>
+        <a th:if="*{idPlotAccessType == 1}">droga asfaltowa</a>
+        <a th:if="*{idPlotAccessType == 2}">droga utwardzona</a>
+        <a th:if="*{idPlotAccessType == 3}">droga nieutwardzona</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idPlotShapeType != null && announcement.idPlotShapeType != 0}">
+      <td><a th:text="|Kształt działki: |" type="text"></a>
+        <a th:if="*{idPlotShapeType == 1}">prostokąt</a>
+        <a th:if="*{idPlotShapeType == 2}">trapez</a>
+        <a th:if="*{idPlotShapeType == 3}">trójkąt</a>
+        <a th:if="*{idPlotShapeType == 4}">nieregularny</a>
+        <a th:if="*{idPlotShapeType == 5}">kwadrat</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idPlotType != null && announcement.idPlotType != 0}">
+      <td><a th:text="|Rodzaj działki: |" type="text"></a>
+        <a th:if="*{idPlotType == 1}">budowlana</a>
+        <a th:if="*{idPlotType == 2}">budowlano-rolna</a>
+        <a th:if="*{idPlotType == 3}">siedliskowa</a>
+        <a th:if="*{idPlotType == 4}">rekreacyjna</a>
+        <a th:if="*{idPlotType == 5}">rolna</a>
+        <a th:if="*{idPlotType == 6}">leśna</a>
+        <a th:if="*{idPlotType == 7}">inwestycyjna</a>
+        <a th:if="*{idPlotType == 8}">przemysłowa</a>
+        <a th:if="*{idPlotType == 10}">usługowa</a>
+        <a th:if="*{idPlotType == 11}">inna</a>
+        <a th:if="*{idPlotType == 12}">rolno-leśna</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.isPlotAccessType != null}">
+      <td><a th:text="|Jest dojazd do działki: |" type="text"></a>
+        <a th:if="*{isPlotAccessType == 1}">Tak</a>
+        <a th:if="*{isPlotAccessType == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.isMSewage != null}">
+      <td><a th:text="|Jest odprowadzenie ścieków: |" type="text"></a>
+        <a th:if="*{isMSewage == 1}">Tak</a>
+        <a th:if="*{isMSewage == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idBPDestType != null && announcement.idBPDestType != 0}">
+      <td><a th:text="|Przeznaczenie: |" type="text"></a>
+        <a th:if="*{idBPDestType == 1}">produkcja</a>
+        <a th:if="*{idBPDestType == 2}">magazyn</a>
+        <a th:if="*{idBPDestType == 3}">biurowe</a>
+        <a th:if="*{idBPDestType == 4}">usługowy</a>
+        <a th:if="*{idBPDestType == 5}">handlowy</a>
+        <a th:if="*{idBPDestType == 6}">gastronomiczny</a>
+        <a th:if="*{idBPDestType == 8}">handlowo-usługowy</a>
+        <a th:if="*{idBPDestType == 9}">warsztat</a>
+        <a th:if="*{idBPDestType == 10}">gabinet</a>
+        <a th:if="*{idBPDestType == 11}">noclegowe</a>
+        <a th:if="*{idBPDestType == 12}">stacja paliw</a>
+        <a th:if="*{idBPDestType == 13}">produkcyjno-magazynowy</a>
+        <a th:if="*{idBPDestType == 14}">sportowo-rekreacyjny</a>
+        <a th:if="*{idBPDestType == 15}">medyczne</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idEntryType != null && announcement.idEntryType != 0}">
+      <td><a th:text="|Rodzaj wejścia: |" type="text"></a>
+        <a th:if="*{idEntryType == 1}">z ulicy</a>
+        <a th:if="*{idEntryType == 2}">od podwórza</a>
+        <a th:if="*{idEntryType == 3}">z klatki schodowej</a>
+        <a th:if="*{idEntryType == 4}">z bramy</a>
+        <a th:if="*{idEntryType == 5}">z balkonu</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.isOwnBgGarageParking != null}">
+      <td><a th:text="|Jest własny parking: |" type="text"></a>
+        <a th:if="*{isOwnBgGarageParking == 1}">Tak</a>
+        <a th:if="*{isOwnBgGarageParking == 2}">Nie</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.idRoomCapacity != null && announcement.idRoomCapacity != 0}">
+      <td><a th:text="|Typ pokoju: |" type="text"></a>
+        <a th:if="*{idRoomCapacity == 1}">1-osobowy</a>
+        <a th:if="*{idRoomCapacity == 2}">2-osobowy</a>
+        <a th:if="*{idRoomCapacity == 3}">3-osobowy</a>
+        <a th:if="*{idRoomCapacity == 4}">wieloosobowy</a>
+      </td>
+    </tr>
+
+    <tr th:if="${announcement.isOvnerInHouse != null}">
+      <td><a th:text="|właściciel mieszka w mieszkaniu: |" type="text"></a>
+        <a th:if="*{isOvnerInHouse == 1}">Tak</a>
+        <a th:if="*{isOvnerInHouse == 2}">Nie</a>
+      </td>
+    </tr>
+
+  </table>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
+</body>
+</html>

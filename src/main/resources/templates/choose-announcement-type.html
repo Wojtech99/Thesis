@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Dodaj ogłoszenie')"></head>
+<body>
+<header th:replace="fragments::header"></header>
+
+
+
+<main class="form-layout">
+  <h4>Rodzaj nieruchomości</h4>
+  <br>
+  <form class="row g-3" method="get" th:action="@{/add-announcement}">
+
+    <select class="form-select" aria-label="Default select example" name="announcementType">
+      <option value="0">Wybierz rodzaj nieruchomości</option>
+      <option th:each="announcementType: ${announcementsTypeList}" th:value="${announcementType}" th:text="${announcementType}"></option>
+    </select>
+
+    <button class="btn btn-primary" type="submit">Dalej</button>
+  </form>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
+</body>
+</html>

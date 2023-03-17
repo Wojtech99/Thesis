@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Dodaj ogłoszenie')"></head>
+<body>
+<header th:replace="fragments::header"></header>
+
+
+
+<main class="form-layout">
+  <form class="row g-3" method="post" th:action="@{/add-announcement/save}" th:object="${property}">
+
+    <div class="form-floating mb-3">
+      <h4><p>Rodzaj nieruchomości:
+        <input th:field="*{announcementType}" th:text="*{announcementType.getDescription()}" type="hidden" >
+      </p></h4>
+    </div>
+
+    <div class="form-floating mb-3" th:if="${property.id != null}">
+      <p>Id:
+        <input th:field="*{id}" th:text="*{id}" type="hidden" >
+      </p>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{regionName}" class="form-control" id="custom01">
+      <label for="custom01" class="form-label">Nazwa województwa</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{districtName}" class="form-control" id="custom02">
+      <label for="custom02" class="form-label">Nazwa powiatu</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{communeName}" class="form-control" id="custom03">
+      <label for="custom03" class="form-label">Nazwa gminy</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{cityName}" class="form-control" id="custom04">
+      <label for="custom04" class="form-label">Nazwa miejscowości</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{street}" class="form-control" id="custom05">
+      <label for="custom05" class="form-label">Ulica</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{area}" class="form-control" id="custom06">
+      <label for="custom06" class="form-label">Powierzchnia</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{price}" class="form-control" id="custom08">
+      <label for="custom08" class="form-label">Cena</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{pricePM}" class="form-control" id="custom09">
+      <label for="custom09" class="form-label">Cena za m2</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <textarea th:field="*{description}" class="form-control" id="textarea" style="height: 450px" required></textarea>
+      <label for="textarea">Opis</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Forma własności:
+        <select class="form-select" aria-label="Default select example" th:field="*{idOwnershipType}">
+          <option value="0">Forma własności</option>
+          <option value="2">spółdzielcze własnościowe</option>
+          <option value="5">udział</option>
+          <option value="7">użytkowanie wieczyste</option>
+          <option value="8">własność</option>
+          <option value="10">dzierżawa</option>
+          <option value="11">akt własności ziemi</option>
+          <option value="12">inna</option>
+        </select></a>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" th:field="*{isMWater}">
+      <label class="form-check-label" for="flexCheckDefault">
+        Czy jest woda ?
+      </label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Źródło wody pitnej:
+        <select class="form-select" aria-label="Default select example" th:field="*{idWaterType}">
+          <option value="0">Źródło wody pitnej</option>
+          <option value="1">woda miejska / wodociąg</option>
+          <option value="2">studnia</option>
+          <option value="4">woda w drodze</option>
+          <option value="5">woda w granicy działki</option>
+        </select></a>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Sposób odprowadzenia ścieków:
+        <select class="form-select" aria-label="Default select example" th:field="*{idSewageType}">
+          <option value="0">Sposób odprowadzenia ścieków</option>
+          <option value="1">kanalizacja</option>
+          <option value="2">oczyszczalnia ścieków</option>
+          <option value="3">szambo</option>
+          <option value="5">oczyszczalnia przydomowa</option>
+        </select></a>
+    </div>
+
+    <a>Czy jest prąd ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio11" value="1" th:field="*{isMElectricity}">
+        <label class="form-check-label" for="inlineRadio11">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio12" value="2" th:field="*{isMElectricity}">
+        <label class="form-check-label" for="inlineRadio12">Nie</label>
+      </div></a>
+
+    <a>Czy jest ogrodzenie ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio13" value="1" th:field="*{isEnclosure}">
+        <label class="form-check-label" for="inlineRadio13">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio14" value="2" th:field="*{isEnclosure}">
+        <label class="form-check-label" for="inlineRadio14">Nie</label>
+      </div></a>
+
+    <a> Dojazd do działki:
+      <select class="form-select" aria-label="Default select example" th:field="*{idPlotAccessType}">
+        <option value="0">Dojazd do działki</option>
+        <option value="1">droga asfaltowa</option>
+        <option value="2">droga utwardzona</option>
+        <option value="3">droga nieutwardzona</option>
+      </select></a>
+
+    <a> Kształt działki:
+      <select class="form-select" aria-label="Default select example" th:field="*{idPlotShapeType}">
+        <option value="0">Kształt działki</option>
+        <option value="1">prostokąt</option>
+        <option value="2">trapez</option>
+        <option value="3">trójkąt</option>
+        <option value="4">nieregularny</option>
+        <option value="5">kwadrat</option>
+      </select></a>
+
+    <a> Rodzaj działki:
+      <select class="form-select" aria-label="Default select example" th:field="*{idPlotType}">
+        <option value="0">Rodzaj działki</option>
+        <option value="1">budowlana</option>
+        <option value="2">budowlano-rolna</option>
+        <option value="3">siedliskowa</option>
+        <option value="4">rekreacyjna</option>
+        <option value="5">rolna</option>
+        <option value="6">leśna</option>
+        <option value="7">inwestycyjna</option>
+        <option value="8">przemysłowa</option>
+        <option value="10">usługowa</option>
+        <option value="11">inna</option>
+        <option value="12">rolno-leśna</option>
+      </select></a>
+
+    <a>Czy jest dojazd do działki ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio15" value="1" th:field="*{isPlotAccessType}">
+        <label class="form-check-label" for="inlineRadio15">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio16" value="2" th:field="*{isPlotAccessType}">
+        <label class="form-check-label" for="inlineRadio16">Nie</label>
+      </div></a>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault2" th:field="*{isMSewage}">
+      <label class="form-check-label" for="flexCheckDefault2">
+        Czy jest odprowadzenie ścieków ?
+      </label>
+    </div>
+
+    <div class="mb-3" th:each="photo : ${property.photos}">
+      <a>Dotychczasowe zdjęcie: </a>
+      <input name="photos" th:text="${photo.name}" type="hidden">
+    </div>
+
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Obrazy</label>
+      <input  class="form-control" type="file" name="files" id="formFile" multiple>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Zapisz</button>
+  </form>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
+</body>
+</html>

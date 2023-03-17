@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Dodaj ogłoszenie')"></head>
+<body>
+<header th:replace="fragments::header"></header>
+
+<h2>Wybierz pola nieruchomości</h2>
+<br>
+<main class="form-layout">
+  <form class="row g-3" method="post" th:action="@{/add-announcement/save}" th:object="${property}">
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{regionName}" class="form-control" id="custom01">
+      <label for="custom01" class="form-label">Nazwa województwa</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{districtName}" class="form-control" id="custom02">
+      <label for="custom02" class="form-label">Nazwa powiatu</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{communeName}" class="form-control" id="custom03">
+      <label for="custom03" class="form-label">Nazwa gminy</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{cityName}" class="form-control" id="custom04">
+      <label for="custom04" class="form-label">Nazwa miejscowości</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{street}" class="form-control" id="custom05">
+      <label for="custom05" class="form-label">Ulica</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{area}" class="form-control" id="custom06">
+      <label for="custom06" class="form-label">Powierzchnia</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{areaUse}" class="form-control" id="custom07">
+      <label for="custom07" class="form-label">Powierzchnia użytkowa</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{price}" class="form-control" id="custom08">
+      <label for="custom08" class="form-label">Cena</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{pricePM}" class="form-control" id="custom09">
+      <label for="custom09" class="form-label">Cena za m2</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{rooms}" class="form-control" id="custom13">
+      <label for="custom13" class="form-label">Liczba pokoi</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Piętro:
+    <select class="form-select" aria-label="Default select example" th:field="*{floor}">
+      <option value="-2">Wybierz piętro</option>
+      <option value="-1">Suterena</option>
+      <option value="0">Parter</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+    </select></a>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Liczba pięter:
+    <select class="form-select" aria-label="Default select example" th:field="*{totalFloors}">
+      <option value="0">Wybierz liczbe pięter</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+    </select></a>
+    </div>
+
+    <a>Czy jest winda ?<p> </p>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" id="inlineRadio1" value="1" th:field="*{isElevator}">
+      <label class="form-check-label" for="inlineRadio1">Tak</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio"  id="inlineRadio2" value="2" th:field="*{isElevator}">
+      <label class="form-check-label" for="inlineRadio2">Nie</label>
+    </div></a>
+
+    <div class="form-floating mb-3">
+      <a> Rodzaj budynku:
+        <select class="form-select" aria-label="Default select example" th:field="*{idBuildingType}">
+          <option value="0">Wybierz rodzaj budynku</option>
+          <option value="1">apartamentowiec</option>
+          <option value="2">bliźniak</option>
+          <option value="3">blok mieszkalny</option>
+          <option value="4">dom wolnostojący</option>
+          <option value="5">dom wielorodzinny</option>
+          <option value="6">dworek/pałac</option>
+          <option value="7">kamienica</option>
+          <option value="8">dom letniskowy</option>
+          <option value="9">rezydencja</option>
+          <option value="11">dom szeregowy</option>
+          <option value="12">budynek wolnostojący</option>
+          <option value="13">kompleks budynków</option>
+          <option value="14">hala</option>
+          <option value="15">garaż</option>
+          <option value="16">biurowiec</option>
+          <option value="17">magazyn</option>
+          <option value="18">gospodarstwo rolne</option>
+          <option value="19">dom z funkcją usługową</option>
+          <option value="20">siedlisko</option>
+          <option value="21">obiekt handlowo-usługowy</option>
+          <option value="22">loft</option>
+          <option value="23">obiekt biurowo-handlowo-usługowy</option>
+          <option value="24">centrum handlowe</option>
+          <option value="25">piętro domu</option>
+          <option value="26">część domu</option>
+          <option value="27">oficyna</option>
+          <option value="28">parking</option>
+        </select></a>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{yearBuilt}" class="form-control" id="custom14">
+      <label for="custom14" class="form-label">Rok Budowy</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Stan mieszkania/domu/lokalu/budynku:
+        <select class="form-select" aria-label="Default select example" th:field="*{idConditionType}">
+          <option value="0">Stan nieruchomości</option>
+          <option value="3">do odświeżenia</option>
+          <option value="4">do remontu</option>
+          <option value="5">do wykończenia</option>
+          <option value="6">deweloperski</option>
+          <option value="7">surowy zamknięty</option>
+          <option value="8">surowy otwarty</option>
+          <option value="9">rozpoczęta budowa</option>
+          <option value="10">nowy wykończony</option>
+          <option value="13">nowe wykończone</option>
+          <option value="14">dobry</option>
+          <option value="15">bardzo dobry</option>
+          <option value="18">wysoki standard</option>
+        </select></a>
+    </div>
+
+      <a>Czy jest miejsce parkingowe ?<p> </p>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="inlineRadio3" value="1" th:field="*{isGarageParking}">
+          <label class="form-check-label" for="inlineRadio3">Tak</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"  id="inlineRadio4" value="2" th:field="*{isGarageParking}">
+          <label class="form-check-label" for="inlineRadio4">Nie</label>
+        </div></a>
+
+      <div class="form-floating mb-3">
+        <textarea th:field="*{description}" class="form-control" id="textarea" style="height: 450px" required></textarea>
+        <label for="textarea">Opis</label>
+      </div>
+
+    <div class="form-floating mb-3">
+      <a> Dostępność:
+        <select class="form-select" aria-label="Default select example" th:field="*{idAvailableFromType}">
+          <option value="0">Dostępność</option>
+          <option value="2">natychmiast</option>
+          <option value="3">do uzgodnienia</option>
+          <option value="4">1 miesiąc</option>
+          <option value="5">2 miesiące</option>
+          <option value="6">3 miesiące</option>
+        </select></a>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Dostępność (rok):
+        <select class="form-select" aria-label="Default select example" th:field="*{availableFromYear}">
+          <option value="0">Dostępność</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select></a>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Dostępność (miesiąc):
+        <select class="form-select" aria-label="Default select example" th:field="*{availableFromMonth}">
+          <option value="0">Dostępność</option>
+          <option value="1">styczeń</option>
+          <option value="2">luty</option>
+          <option value="3">marzec</option>
+          <option value="4">kwiecień</option>
+          <option value="5">maj</option>
+          <option value="6">czerwiec</option>
+          <option value="7">lipiec</option>
+          <option value="8">sierpień</option>
+          <option value="9">wrzesień</option>
+          <option value="10">październik</option>
+          <option value="11">listopad</option>
+          <option value="12">grudzień</option>
+        </select></a>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Forma własności:
+        <select class="form-select" aria-label="Default select example" th:field="*{idOwnershipType}">
+          <option value="0">Forma własności</option>
+          <option value="2">spółdzielcze własnościowe</option>
+          <option value="5">udział</option>
+          <option value="7">użytkowanie wieczyste</option>
+          <option value="8">własność</option>
+          <option value="10">dzierżawa</option>
+          <option value="11">akt własności ziemi</option>
+          <option value="12">inna</option>
+        </select></a>
+    </div>
+
+    <a>Czy jest balkon ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio5" value="1" th:field="*{isBalcony}">
+        <label class="form-check-label" for="inlineRadio5">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio6" value="2" th:field="*{isBalcony}">
+        <label class="form-check-label" for="inlineRadio6">Nie</label>
+      </div></a>
+
+    <a>Czy jest piwnica ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio7" value="1" th:field="*{isBasement}">
+        <label class="form-check-label" for="inlineRadio7">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio8" value="2" th:field="*{isBasement}">
+        <label class="form-check-label" for="inlineRadio8">Nie</label>
+      </div></a>
+
+    <div class="form-floating mb-3">
+      <a> Liczba poziomów:
+        <select class="form-select" aria-label="Default select example" th:field="*{levels}">
+          <option value="0">Liczba poziomów</option>
+          <option value="1">jednopoziomowe</option>
+          <option value="2">dwupoziomowe</option>
+          <option value="3">wielopoziomowe</option>
+        </select></a>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{bathRooms}" class="form-control" id="custom15">
+      <label for="custom15" class="form-label">Liczba Łazienek</label>
+    </div>
+
+    <a>Czy jest umeblowane ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio9" value="1" th:field="*{isFurnished}">
+        <label class="form-check-label" for="inlineRadio9">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio10" value="2" th:field="*{isFurnished}">
+        <label class="form-check-label" for="inlineRadio10">Nie</label>
+      </div></a>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{pledge}" class="form-control" id="custom16">
+      <label for="custom16" class="form-label">Kaucja (kwota)</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Typ kaucji:
+        <select class="form-select" aria-label="Default select example" th:field="*{idPledgeType}">
+          <option value="0">Typ kaucji</option>
+          <option value="1">1-krotność czynszu</option>
+          <option value="2">2-krotność czynszu</option>
+          <option value="3">3-krotność czynszu</option>
+          <option value="4">do uzgodnienia</option>
+          <option value="5">gwarancja bankowa</option>
+        </select></a>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" th:field="*{additionalCharges}" class="form-control" id="custom17">
+      <label for="custom17" class="form-label">Dodatkowe opłaty</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="number" th:field="*{areaPlot}" class="form-control" id="custom18">
+      <label for="custom18" class="form-label">Powierzchnia działki</label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" th:field="*{isMWater}">
+        <label class="form-check-label" for="flexCheckDefault">
+          Czy jest woda ?
+        </label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Źródło wody pitnej:
+        <select class="form-select" aria-label="Default select example" th:field="*{idWaterType}">
+          <option value="0">Źródło wody pitnej</option>
+          <option value="1">woda miejska / wodociąg</option>
+          <option value="2">studnia</option>
+          <option value="4">woda w drodze</option>
+          <option value="5">woda w granicy działki</option>
+        </select></a>
+    </div>
+
+    <div class="form-floating mb-3">
+      <a> Sposób odprowadzenia ścieków:
+        <select class="form-select" aria-label="Default select example" th:field="*{idSewageType}">
+          <option value="0">Sposób odprowadzenia ścieków</option>
+          <option value="1">kanalizacja</option>
+          <option value="2">oczyszczalnia ścieków</option>
+          <option value="3">szambo</option>
+          <option value="5">oczyszczalnia przydomowa</option>
+        </select></a>
+    </div>
+
+    <a>Czy jest prąd ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio11" value="1" th:field="*{isMElectricity}">
+        <label class="form-check-label" for="inlineRadio11">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio12" value="2" th:field="*{isMElectricity}">
+        <label class="form-check-label" for="inlineRadio12">Nie</label>
+      </div></a>
+
+    <a>Czy jest ogrodzenie ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio13" value="1" th:field="*{isEnclosure}">
+        <label class="form-check-label" for="inlineRadio13">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio14" value="2" th:field="*{isEnclosure}">
+        <label class="form-check-label" for="inlineRadio14">Nie</label>
+      </div></a>
+
+    <a> Dojazd do działki:
+      <select class="form-select" aria-label="Default select example" th:field="*{idPlotAccessType}">
+        <option value="0">Dojazd do działki</option>
+        <option value="1">droga asfaltowa</option>
+        <option value="2">droga utwardzona</option>
+        <option value="3">droga nieutwardzona</option>
+      </select></a>
+
+    <a> Kształt działki:
+      <select class="form-select" aria-label="Default select example" th:field="*{idPlotShapeType}">
+        <option value="0">Kształt działki</option>
+        <option value="1">prostokąt</option>
+        <option value="2">trapez</option>
+        <option value="3">trójkąt</option>
+        <option value="4">nieregularny</option>
+        <option value="5">kwadrat</option>
+      </select></a>
+
+    <a> Rodzaj działki:
+      <select class="form-select" aria-label="Default select example" th:field="*{idPlotType}">
+        <option value="0">Rodzaj działki</option>
+        <option value="1">budowlana</option>
+        <option value="2">budowlano-rolna</option>
+        <option value="3">siedliskowa</option>
+        <option value="4">rekreacyjna</option>
+        <option value="5">rolna</option>
+        <option value="6">leśna</option>
+        <option value="7">inwestycyjna</option>
+        <option value="8">przemysłowa</option>
+        <option value="10">usługowa</option>
+        <option value="11">inna</option>
+        <option value="12">rolno-leśna</option>
+      </select></a>
+
+    <a>Czy jest dojazd do działki ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio15" value="1" th:field="*{isPlotAccessType}">
+        <label class="form-check-label" for="inlineRadio15">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio16" value="2" th:field="*{isPlotAccessType}">
+        <label class="form-check-label" for="inlineRadio16">Nie</label>
+      </div></a>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault2" th:field="*{isMSewage}">
+      <label class="form-check-label" for="flexCheckDefault2">
+        Czy jest odprowadzenie ścieków ?
+      </label>
+    </div>
+
+    <a> Przeznaczenie lokalu/budynku:
+      <select class="form-select" aria-label="Default select example" th:field="*{idBPDestType}">
+        <option value="0">Przeznaczenie</option>
+        <option value="1">produkcja</option>
+        <option value="2">magazyn</option>
+        <option value="3">biurowe</option>
+        <option value="4">usługowy</option>
+        <option value="5">handlowy</option>
+        <option value="6">gastronomiczny</option>
+        <option value="8">handlowo-usługowy</option>
+        <option value="9">warsztat</option>
+        <option value="10">gabinet</option>
+        <option value="11">noclegowe</option>
+        <option value="12">stacja paliw</option>
+        <option value="13">produkcyjno-magazynowy</option>
+        <option value="14">sportowo-rekreacyjny</option>
+        <option value="15">medyczne</option>
+      </select></a>
+
+    <a> Rodzaj wejścia:
+      <select class="form-select" aria-label="Default select example" th:field="*{idEntryType}">
+        <option value="0">Rodzaj</option>
+        <option value="1">z ulicy</option>
+        <option value="2">od podwórza</option>
+        <option value="3">z klatki schodowej</option>
+        <option value="4">z bramy</option>
+        <option value="5">z balkonu</option>
+      </select></a>
+
+    <a>Czy jest własny parking ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio17" value="1" th:field="*{isOwnBgGarageParking}">
+        <label class="form-check-label" for="inlineRadio17">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio18" value="2" th:field="*{isOwnBgGarageParking}">
+        <label class="form-check-label" for="inlineRadio18">Nie</label>
+      </div></a>
+
+    <a> Typ pokoju:
+      <select class="form-select" aria-label="Default select example" th:field="*{idRoomCapacity}">
+        <option value="0">Typ pokoju</option>
+        <option value="1">1-osobowy</option>
+        <option value="2">2-osobowy</option>
+        <option value="3">3-osobowy</option>
+        <option value="4">wieloosobowy</option>
+      </select></a>
+
+    <a>Czy właściciel mieszka w mieszkaniu ?<p> </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="inlineRadio19" value="1" th:field="*{isOvnerInHouse}">
+        <label class="form-check-label" for="inlineRadio19">Tak</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio"  id="inlineRadio20" value="2" th:field="*{isOvnerInHouse}">
+        <label class="form-check-label" for="inlineRadio20">Nie</label>
+      </div></a>
+
+    <button class="btn btn-primary" type="submit">Zapisz</button>
+  </form>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
+</body>
+</html>

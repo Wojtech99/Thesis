@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Choose highlighted')"></head>
+<body>
+<header th:replace="fragments::header"></header>
+
+
+
+<main class="form-layout">
+  <h3>Wyróżnij ogłoszenia</h3>
+  <br>
+  <form class="row g-3" method="post" th:action="@{/choose-announcements/save}">
+
+    <div class="form-check" th:each="property: ${properties}">
+      <input class="form-check-input" type="checkbox" name="selectedProperties" th:value="${property.id}" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault" th:text="|${property.cityName}, ${property.street}|">
+        Default checkbox
+      </label>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Wyróżnij</button>
+  </form>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
+</body>
+</html>

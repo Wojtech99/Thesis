@@ -13,9 +13,25 @@ main {
     top: 10%;
 }
 
+.text {
+    display: block;
+    width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .articlePhoto {
     max-width: 60%;
     max-height: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.announcementPhoto {
+    max-width: 400px;
+    max-height: 400px;
     display: block;
     margin-left: auto;
     margin-right: auto;
