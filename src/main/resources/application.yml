@@ -5,12 +5,14 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
   liquibase:
     change-log: classpath:dbChangeLog/master.xml
 
   servlet:
     multipart:
       enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
 
 staticImageDirectory: "/src/main/resources/static/images/"

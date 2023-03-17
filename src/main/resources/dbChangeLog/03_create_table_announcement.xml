@@ -3,14 +3,74 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
     <changeSet id="03" author="Wojciech">
         <createTable tableName="announcement">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="user_id" type="BIGINT"/>
-
+            <column name="announcement_type" type="SMALLINT"/>
+            <column name="is_highlighted" type="BOOL"/>
+            <column name="action" type="VARCHAR(150)"/>
+            <column name="regionName" type="VARCHAR(150)"/>
+            <column name="districtName" type="VARCHAR(150)"/>
+            <column name="communeName" type="VARCHAR(150)"/>
+            <column name="cityName" type="VARCHAR(150)"/>
+            <column name="street" type="VARCHAR(150)"/>
+            <column name="idCategory" type="integer"/>
+            <column name="idAdType" type="integer"/>
+            <column name="idAgent" type="integer"/>
+            <column name="area" type="float"/>
+            <column name="areaUse" type="float"/>
+            <column name="price" type="float"/>
+            <column name="pricePM" type="float"/>
+            <column name="rooms" type="integer"/>
+            <column name="floor" type="integer"/>
+            <column name="totalFloors" type="integer"/>
+            <column name="isElevator" type="integer"/>
+            <column name="idBuildingType" type="integer"/>
+            <column name="yearBuilt" type="integer"/>
+            <column name="idConditionType" type="integer"/>
+            <column name="isGarageParking" type="integer"/>
+            <column name="description" type="VARCHAR(3500)"/>
+            <column name="idAvailableFromType" type="integer"/>
+            <column name="availableFromYear" type="integer"/>
+            <column name="availableFromMonth" type="integer"/>
+            <column name="idOwnershipType" type="integer"/>
+            <column name="isBalcony" type="integer"/>
+            <column name="isBasement" type="integer"/>
+            <column name="levels" type="integer"/>
+            <column name="jKitchen" type="smallint"/>
+            <column name="jEquipment" type="smallint"/>
+            <column name="bathRooms" type="integer"/>
+            <column name="isFurnished" type="integer"/>
+            <column name="jHeatingType" type="smallint"/>
+            <column name="pledge" type="float"/>
+            <column name="idPledgeType" type="integer"/>
+            <column name="jIdPreferedProfession" type="smallint"/>
+            <column name="additionalCharges" type="VARCHAR(300)"/>
+            <column name="areaPlot" type="float"/>
+            <column name="isMWater" type="integer"/>
+            <column name="idWaterType" type="integer"/>
+            <column name="idSewageType" type="integer"/>
+            <column name="isMElectricity" type="integer"/>
+            <column name="isEnclosure" type="integer"/>
+            <column name="idPlotAccessType" type="integer"/>
+            <column name="idPlotShapeType" type="integer"/>
+            <column name="jPlotSituationLookType" type="smallint"/>
+            <column name="idPlotType" type="integer"/>
+            <column name="isPlotAccessType" type="integer"/>
+            <column name="isMSewage" type="integer"/>
+            <column name="idBPDestType" type="integer"/>
+            <column name="idEntryType" type="integer"/>
+            <column name="isOwnBgGarageParking" type="integer"/>
+            <column name="idRoomCapacity" type="integer"/>
+            <column name="idAdCreator" type="integer"/>
+            <column name="isOvnerInHouse" type="integer"/>
+            <column name="jIdPreferedGender" type="smallint"/>
+            <column name="mapLatitude" type="VARCHAR(150)"/>
+            <column name="mapLongitude" type="VARCHAR(150)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

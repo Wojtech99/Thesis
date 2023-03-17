@@ -9,4 +9,5 @@
     <include file="03_create_table_announcement.xml" relativeToChangelogFile="true" />
     <include file="testdata/testdata_01_add_user.xml" relativeToChangelogFile="true" />
     <include file="04_create_table_agreement.xml" relativeToChangelogFile="true" />
+    <include file="05_create_table_photo.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>
