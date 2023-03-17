@@ -76,7 +76,7 @@ public class UserController {
 
         userService.registerNewAgent(appUserDto);
 
-        return "redirect:/agent/register-form";
+        return "redirect:/agents-list";
     }
 
     /**

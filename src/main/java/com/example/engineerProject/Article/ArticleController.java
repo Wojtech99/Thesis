@@ -2,7 +2,6 @@ package com.example.engineerProject.Article;
 
 import com.example.engineerProject.Data.ImageService;
 import jakarta.validation.Valid;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,10 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Set;
 
 @Controller
@@ -99,7 +96,7 @@ public class ArticleController {
             method = {RequestMethod.PATCH, RequestMethod.POST}
     )
     String updateArticle(@Valid @ModelAttribute("editArticle") ArticleDto articleDto,
-                         @Param("image") MultipartFile imageFile,
+                         @RequestParam("image") MultipartFile imageFile,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             return "edit-article-form";

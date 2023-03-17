@@ -45,7 +45,7 @@ public class AgreementController {
             throw new NoSuchElementException();
         }
 
-        return "redirect:/add-agreement";
+        return "redirect:/show-agreements";
     }
 
     /**

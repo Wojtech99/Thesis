@@ -16,7 +16,7 @@ public class AppUserDto {
     private String lastName;
     @Min(9)
     private Integer phoneNumber;
-    @NotNull(message = "this field can not be null")
+    @NotNull(message = "This field can not be null")
     @Email
     private String email;
     @Size(min = 8, max = 1600)
