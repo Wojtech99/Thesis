@@ -17,7 +17,7 @@ public class ArticleDto {
     private String title;
     private String picture;
     @NotNull
-    @Size(max = 5500)
+    @Size(max = 3500)
     @SqlInjectionProtector(lang = Lang.INJECTION_WORDS)
     private String description;
     private Date date;
