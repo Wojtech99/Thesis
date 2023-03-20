@@ -200,7 +200,7 @@ public class AnnouncementController {
     }
 
     @PostMapping("/choose-announcements/save")
-    String saveHighlightedAnnouncement(@RequestParam("selectedProperties") Set<Long> choseAnnouncements) {
+    String saveHighlightedAnnouncements(@RequestParam("selectedProperties") Set<Long> choseAnnouncements) {
         int maximumHighlightedAnnouncements = 3;
 
         if (choseAnnouncements.stream().count() > maximumHighlightedAnnouncements) {

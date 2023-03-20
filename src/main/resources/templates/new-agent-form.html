@@ -4,9 +4,9 @@
 <body>
 <header th:replace="fragments::header"></header>
 
-<h2>Dodaj nowego agenta</h2>
-<br>
+
 <main class="form-layout">
+    <h2>Dodaj nowego agenta</h2>
     <form class="row g-3" method="post" th:action="@{/agent/save}" th:object="${agent}">
         <div class="form-floating mb-3">
             <input type="text" th:field="*{firstName}" class="form-control" id="validationCustom02">

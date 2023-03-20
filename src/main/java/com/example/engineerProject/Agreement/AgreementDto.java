@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class AgreementDto {
+public class AgreementDto implements Comparable<AgreementDto> {
     private Long id;
     private String name;
     private String type;
@@ -76,5 +76,16 @@ public class AgreementDto {
         int result = Objects.hash(id, name, type, uploadDate);
         result = 31 * result + Arrays.hashCode(bytes);
         return result;
+    }
+
+    @Override
+    public int compareTo(AgreementDto a) {
+
+        int uploadDateCompare = uploadDate.compareTo(a.uploadDate);
+        if(uploadDateCompare != 0) {
+            return uploadDateCompare;
+        }
+
+        return name.compareTo(a.name);
     }
 }

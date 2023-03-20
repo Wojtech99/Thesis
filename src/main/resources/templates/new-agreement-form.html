@@ -4,14 +4,13 @@
 <body>
 <header th:replace="fragments::header"></header>
 
-<h2>Dodaj nową umowę</h2>
-<br>
 <main class="form-layout">
-  <form class="row g-3" method="post" enctype="multipart/form-data" th:action="@{|/add-agreement/save|}">
+  <h2>Dodaj nową umowę</h2>
+  <form class="g-3" method="post" enctype="multipart/form-data" th:action="@{|/add-agreement/save|}">
 
     <div class="mb-3">
       <label for="formFile" class="form-label">Umowa w formacie ".pdf"</label>
-      <input  class="form-control" type="file" name="pdfFile" id="formFile" multiple required>
+      <input  class="form-control" type="file" name="pdfFile" id="formFile" required>
     </div>
     <button class="btn btn-primary" type="submit">Wprowadź umowę do systemu</button>
   </form>

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 
 @Controller
@@ -33,19 +34,25 @@ public class AgreementController {
 
     /**
      * save new pdf agreement
-     * @param multipartFile MultipartFile
+     * @param pdfFile file in pdf format
      * @return String
      */
     @PostMapping("/add-agreement/save")
-    String saveAgreement(@RequestParam("pdfFile") MultipartFile multipartFile) {
+    String saveAgreement(@RequestParam("pdfFile") MultipartFile pdfFile) {
+        String returnSite = "redirect:/show-agreements";
+
+        if (!Objects.requireNonNull(pdfFile.getOriginalFilename()).endsWith(".pdf")) {
+            returnSite = "new-agreement-form";
+            return returnSite;
+        }
 
         try {
-            agreementService.saveAgreement(multipartFile);
+            agreementService.saveAgreement(pdfFile);
         } catch (IOException exception) {
             throw new NoSuchElementException();
         }
 
-        return "redirect:/show-agreements";
+        return returnSite;
     }
 
     /**
@@ -57,7 +64,7 @@ public class AgreementController {
     String showAllAgreements(Model model) {
         Set<AgreementDto> agreements = agreementService.showAllAgreements();
 
-        model.addAttribute("agreements", agreements);
+        model.addAttribute("agreements", agreements.stream().sorted());
 
         return "agreements-list";
     }
@@ -80,7 +87,8 @@ public class AgreementController {
     ResponseEntity<ByteArrayResource> downloadAgreement(@PathVariable("id") Long agreementId) {
         AgreementDto agreementDto = agreementService.getAgreement(agreementId);
 
-        return ResponseEntity.ok()
+        return ResponseEntity
+                .ok()
                 .contentType(MediaType.parseMediaType(agreementDto.getType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\""
                         + agreementDto.getName() + "\"")

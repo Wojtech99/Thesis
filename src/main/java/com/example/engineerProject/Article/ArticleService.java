@@ -2,6 +2,7 @@ package com.example.engineerProject.Article;
 
 import com.example.engineerProject.User.AppUser;
 import com.example.engineerProject.User.AppUserService;
+import com.example.engineerProject.User.Role;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,11 +26,12 @@ public class ArticleService {
     @Transactional
     ArticleDto saveArticle(ArticleDto articleDto) {
         Date date = new Date(System.currentTimeMillis());
-        AppUser appUserDto = userService.getCurrentUserToSave();
+        AppUser appUser = userService.getCurrentUserToSave();
 
         articleDto.setDate(date);
-        articleDto.setUser(appUserDto);
-        articleDto.setApprovedByManager(false);
+        articleDto.setUser(appUser);
+
+        articleDto.setApprovedByManager(appUser.getRole().getDescription().equals(Role.MANAGER.getDescription()));
 
         Article articleToSave = ArticleMapper.map(articleDto);
         Article savedArticle = articleRepository.save(articleToSave);
@@ -59,11 +61,17 @@ public class ArticleService {
 
     @Transactional
     Optional<ArticleDto> updateArticle(ArticleDto articleDto) {
-        if(articleRepository.findById(articleDto.getId()).isEmpty()) {
+        Optional<Article> optionalArticle = articleRepository.findById(articleDto.getId());
+
+        if(optionalArticle.isEmpty()) {
             return Optional.empty();
         }
 
-        Article article = articleRepository.findById(articleDto.getId()).get();
+        AppUser appUser = userService.getCurrentUserToSave();
+        articleDto.setApprovedByManager(appUser.getRole().getDescription().equals(Role.MANAGER.getDescription()));
+
+
+        Article article = optionalArticle.get();
         Article articleToUpdate = setEntityFields(article, articleDto);
         Article savedArticle = articleRepository.save(articleToUpdate);
 
@@ -103,10 +111,12 @@ public class ArticleService {
     }
 
     Optional<ArticleDto> takeArticleById(Long id) {
-        if (articleRepository.findById(id).isEmpty()) {
+        Optional<Article> optionalArticleDto = articleRepository.findById(id);
+
+        if (optionalArticleDto.isEmpty()) {
             return Optional.empty();
         }
-        Article article = articleRepository.findById(id).get();
+        Article article = optionalArticleDto.get();
 
         return Optional.of(ArticleMapper.map(article));
     }

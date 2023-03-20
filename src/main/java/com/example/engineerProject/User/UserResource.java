@@ -22,17 +22,6 @@ public class UserResource {
         this.userService = userService;
     }
 
-    @GetMapping("/agent-list")
-    ResponseEntity<Set<AppUserDto>> getAgentList(){
-        return ResponseEntity.ok(userService.getAllAgents());
-    }
-
-    @DeleteMapping("/delete/{email}")
-    ResponseEntity<?> deleteAgent(@PathVariable String email) {
-        userService.deleteAgentByEmail(email);
-        return ResponseEntity.noContent().build();
-    }
-
     @PostMapping("/save-new-agent")
     ResponseEntity<AppUserDto> saveNewUser(@Valid @RequestBody AppUserDto userDto){
         AppUserDto savedUser = userService.registerNewAgent(userDto);
@@ -42,6 +31,17 @@ public class UserResource {
                 .toUri();
 
         return ResponseEntity.created(savedUserUri).body(savedUser);
+    }
+
+    @GetMapping("/agent-list")
+    ResponseEntity<Set<AppUserDto>> getAgentList(){
+        return ResponseEntity.ok(userService.getAllAgents());
+    }
+
+    @DeleteMapping("/delete/{email}")
+    ResponseEntity<?> deleteAgent(@PathVariable String email) {
+        userService.deleteAgentByEmail(email);
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/update")

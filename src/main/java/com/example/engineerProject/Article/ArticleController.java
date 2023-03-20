@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class ArticleController {
@@ -56,6 +54,13 @@ public class ArticleController {
         }
 
         try{
+            if (!Objects.requireNonNull(imageFile.getOriginalFilename()).endsWith(".jpg") &&
+                    !Objects.requireNonNull(imageFile.getOriginalFilename()).endsWith(".JPG") &&
+                    !Objects.requireNonNull(imageFile.getOriginalFilename()).endsWith(".png")) {
+                returnSite = "new-article-form";
+                return returnSite;
+            }
+
             String imagePath = imageService.saveData(imageFile);
             articleDto.setPicture(imagePath);
             articleService.saveArticle(articleDto);
@@ -75,14 +80,19 @@ public class ArticleController {
      */
     @GetMapping("/edit-form/{id}")
     String editArticle(@PathVariable("id") Long articleId, Model model) {
-        if (articleService.takeArticleById(articleId).isEmpty()) {
-            return "redirect:/all-user-articles";
+        Optional<ArticleDto> optionalArticleDto = articleService.takeArticleById(articleId);
+
+        String returnSite = "edit-article-form";
+
+        if (optionalArticleDto.isEmpty()) {
+            returnSite = "redirect:/all-user-articles";
+            return returnSite;
         }
 
-        ArticleDto articleDto = articleService.takeArticleById(articleId).get();
+        ArticleDto articleDto = optionalArticleDto.get();
         model.addAttribute("editArticle", articleDto);
 
-        return "edit-article-form";
+        return returnSite;
     }
 
     /**
@@ -98,11 +108,21 @@ public class ArticleController {
     String updateArticle(@Valid @ModelAttribute("editArticle") ArticleDto articleDto,
                          @RequestParam("image") MultipartFile imageFile,
                          BindingResult bindingResult) {
+        String returnSite = "redirect:/all-user-articles";
+
         if (bindingResult.hasErrors()){
-            return "edit-article-form";
+            returnSite = "edit-article-form";
+            return returnSite;
         }
 
         if (imageFile != null) {
+            if (!Objects.requireNonNull(imageFile.getOriginalFilename()).endsWith(".jpg") &&
+                    !Objects.requireNonNull(imageFile.getOriginalFilename()).endsWith(".JPG") &&
+                    !Objects.requireNonNull(imageFile.getOriginalFilename()).endsWith(".png")) {
+                returnSite = "new-article-form";
+                return returnSite;
+            }
+
             try {
                 imageService.deleteData(articleDto.getPicture());
 
@@ -115,7 +135,7 @@ public class ArticleController {
 
         articleService.updateArticle(articleDto);
 
-        return "redirect:/all-user-articles";
+        return returnSite;
     }
 
     /**
@@ -129,8 +149,10 @@ public class ArticleController {
     )
     String deleteArticle(@PathVariable("id") Long id) {
         try {
-            if (articleService.takeArticleById(id).isPresent()) {
-                ArticleDto articleDto = articleService.takeArticleById(id).get();
+            Optional<ArticleDto> optionalArticleDto = articleService.takeArticleById(id);
+
+            if (optionalArticleDto.isPresent()) {
+                ArticleDto articleDto = optionalArticleDto.get();
 
                 imageService.deleteData(articleDto.getPicture());
             }
@@ -166,14 +188,19 @@ public class ArticleController {
      */
     @GetMapping("/article/{id}")
     String singleArticle(@PathVariable("id") Long articleId, Model model) {
-        if (articleService.takeArticleById(articleId).isEmpty()) {
-            return "approved-articles-list";
+        String returnSite = "single-article";
+
+        Optional<ArticleDto> optionalArticleDto = articleService.takeArticleById(articleId);
+
+        if (optionalArticleDto.isEmpty()) {
+            returnSite = "redirect:/all-approved";
+            return returnSite;
         }
 
-        ArticleDto articleDto = articleService.takeArticleById(articleId).get();
+        ArticleDto articleDto = optionalArticleDto.get();
         model.addAttribute("article", articleDto);
 
-        return "single-article";
+        return returnSite;
     }
 
     /**

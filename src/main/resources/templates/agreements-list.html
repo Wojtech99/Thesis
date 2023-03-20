@@ -9,18 +9,21 @@
     <thead>
     <tr>
       <td><a>Nazwa</a></td>
+      <td><a>Data wprowadzenia umowy</a></td>
       <td><a>Pobierz umowę</a></td>
       <td><a>Usuń umowę</a></td>
     </tr>
     </thead>
-    <tbody th:remove="all-but-first" th:each="agreement: ${agreements}">
-        <tr>
+    <tbody th:remove="all-but-first" >
+        <tr th:each="agreement: ${agreements}">
           <td><a th:text="|${agreement.name}|"></a></td>
+          <td><a th:text="|${agreement.uploadDate}|"></a></td>
           <td><a href="#" th:href="@{|/show-agreements/download/${agreement.id}|}">Pobierz</a></td>
           <td><a href="#" th:href="@{|/show-agreements/delete/${agreement.id}|}">Usuń</a></td>
         </tr>
         <tr>
           <td><a>title</a></td>
+          <td><a>Data wprowadzenia umowy</a></td>
           <td><a href="#">Pobierz</a></td>
           <td><a href="#">Usuń</a></td>
         </tr>

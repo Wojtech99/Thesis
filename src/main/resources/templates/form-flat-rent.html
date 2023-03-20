@@ -7,7 +7,7 @@
 
 
 <main class="form-layout">
-  <form class="row g-3" method="post" th:action="@{/add-announcement/save}" th:object="${property}">
+  <form class="row g-3" method="post" enctype="multipart/form-data" th:action="@{/add-announcement/save}" th:object="${property}">
 
     <div class="form-floating mb-3">
       <h4><p>Rodzaj nieruchomości:

@@ -4,9 +4,9 @@
 <body>
 <header th:replace="fragments::header"></header>
 
-<h2>Edytuj Profil</h2>
-<br>
+
 <main class="form-layout">
+    <h2>Edytuj Profil</h2>
     <form class="row g-3" method="post" th:action="@{|/user/update-form/update|}" th:object="${userToEdit}">
         <div class="form-floating mb-3">
             <p>Email:

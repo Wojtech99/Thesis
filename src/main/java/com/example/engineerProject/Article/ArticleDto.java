@@ -1,5 +1,7 @@
 package com.example.engineerProject.Article;
 
+import com.example.engineerProject.OwnValidatior.Lang;
+import com.example.engineerProject.OwnValidatior.SqlInjectionProtector;
 import com.example.engineerProject.User.AppUser;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,10 +13,12 @@ public class ArticleDto {
     private Long id;
     @NotNull
     @Size(min = 3, max = 150)
+    @SqlInjectionProtector(lang = Lang.INJECTION_WORDS)
     private String title;
     private String picture;
     @NotNull
     @Size(max = 5500)
+    @SqlInjectionProtector(lang = Lang.INJECTION_WORDS)
     private String description;
     private Date date;
     private Boolean approvedByManager;
