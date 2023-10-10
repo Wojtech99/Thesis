@@ -1,5 +1,5 @@
 # engineerProject
 
-O projekcie: Aplikacja webowa mająca na celu wspomaganie agencji nieruchomości po przez wystawienie jednego ogłoszenia na wielu portalach jednocześnie, dodatkowo możliwość towrzenia artykółów na stronę internetową, tworzenia Agentów (pracowników), oraz archiwizacja umów w postaci pdf.
+About the project: A web application designed to support real estate agencies by displaying one advertisement on multiple portals simultaneously, in addition to the possibility of uploading articles to the website, creating Agents (employees), and archiving contracts in pdf form.
 
-Aplikacja wykorzystuje: API, Spring security, CRUD, Spring boot, Hibernate, Liquibase, Spring Data jpa, MariaDB Thymeleaf
+The application uses: Spring data with Hibernate and Liquibase, Spring Security, Spring framework, thymeleaf, MariaDB
